@@ -21,18 +21,18 @@ import java.util.Set;
 @Audited
 public class Articulo extends Base {
 
-    protected String denominacion;
-    protected Double precioVenta;
+    private String denominacion;
+    private Double precioVenta;
     @Builder.Default
-    protected boolean habilitado = true;
-    protected String codigo;
+    private boolean habilitado = true;
+    private String codigo;
 
 
     @OneToMany
     @JoinColumn(name = "articulo_id")
     @Builder.Default
     @NotAudited
-    protected Set<ImagenArticulo> imagenes = new HashSet<>();
+    private Set<ImagenArticulo> imagenes = new HashSet<>();
 
 
 
@@ -42,11 +42,11 @@ public class Articulo extends Base {
     private Categoria categoria;
 
 
-    @ManyToMany(cascade = CascadeType.MERGE)
+    @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(name = "articulo_alergenos",
             joinColumns = @JoinColumn(name = "articulo_id"),
             inverseJoinColumns = @JoinColumn(name = "alergenos_id"))
     @Builder.Default
-    private Set<Alergenos> alergenos=new HashSet<>();
+    private Set<Alergeno> alergenos=new HashSet<>();
 }
 

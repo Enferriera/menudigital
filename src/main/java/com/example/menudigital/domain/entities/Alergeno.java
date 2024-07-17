@@ -14,7 +14,7 @@ import org.hibernate.envers.Audited;
 @SuperBuilder
 
 @Audited
-public class Alergenos extends Base {
+public class Alergeno extends Base {
 
     private String denominacion;
     private String imagen;
