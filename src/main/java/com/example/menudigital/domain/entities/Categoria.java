@@ -22,8 +22,8 @@ public class Categoria extends Base{
 
 
 
-    @OneToMany
-    @JoinColumn(name = "categoria_id")
+    @OneToMany(mappedBy = "categoria")
+    //@JoinColumn(name = "categoria_id")
     @Builder.Default
     private Set<Articulo> articulos = new HashSet<>();
 
@@ -37,4 +37,7 @@ public class Categoria extends Base{
     @JsonIgnoreProperties("subCategorias")
     private Categoria categoriaPadre;
 
+    @ManyToMany(mappedBy = "categorias")
+    @Builder.Default
+    private Set<Sucursal> sucursales = new HashSet<>();
 }

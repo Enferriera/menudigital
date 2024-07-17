@@ -18,7 +18,6 @@ import java.util.Set;
 @ToString
 @Setter
 @SuperBuilder
-
 @Audited
 public class Articulo extends Base {
 
@@ -37,11 +36,17 @@ public class Articulo extends Base {
 
 
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "categoria_id")
     @JsonIgnoreProperties("articulos")
     private Categoria categoria;
 
 
+    @ManyToMany(cascade = CascadeType.MERGE)
+    @JoinTable(name = "articulo_alergenos",
+            joinColumns = @JoinColumn(name = "articulo_id"),
+            inverseJoinColumns = @JoinColumn(name = "alergenos_id"))
+    @Builder.Default
+    private Set<Alergenos> alergenos=new HashSet<>();
 }
 
