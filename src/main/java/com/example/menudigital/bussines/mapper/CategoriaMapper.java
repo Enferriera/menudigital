@@ -13,15 +13,13 @@ import org.mapstruct.Mappings;
 
 import java.util.List;
 
-@Mapper(componentModel = "spring", uses = {ArticuloMapper.class, SucursalMapper.class, SucursalService.class, CategoriaService.class})
+@Mapper(componentModel = "spring", uses = {ArticuloMapper.class, SucursalMapper.class, SucursalService.class, CategoriaService.class,DomicilioMapper.class})
 public interface CategoriaMapper extends BaseMapper<Categoria, CategoriaDto>{
 
     CategoriaShortDto toShortDTO(Categoria source);
 
-
-
     @Mappings({
-            @Mapping(source = "idSucursales", target = "sucursales", qualifiedByName = "getById",defaultExpression = "java(new java.util.HashSet<>())"),
+            @Mapping(source = "idSucursales", target = "sucursales", qualifiedByName = "getById"),
             @Mapping(source = "idCategoriaPadre", target = "categoriaPadre", qualifiedByName = "getById",defaultExpression = "java(null)"),
     })
     Categoria toEntityCreate(CategoriaCreateDto source);

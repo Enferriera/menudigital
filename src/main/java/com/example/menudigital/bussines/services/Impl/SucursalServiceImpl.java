@@ -8,8 +8,6 @@ import com.example.menudigital.repositories.DomicilioRepository;
 import com.example.menudigital.repositories.EmpresaRepository;
 import com.example.menudigital.repositories.SucursalRepository;
 import jakarta.transaction.Transactional;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -19,7 +17,7 @@ import java.util.List;
 import java.util.Set;
 
 @Service
-public class SucursalServiceImpl extends BaseServiceImp<Sucursal,Long> implements SucursalService {
+public class SucursalServiceImpl extends BaseServiceImp<Sucursal, Long> implements SucursalService {
     @Autowired
     private SucursalRepository sucursalRepository;
     @Autowired
@@ -30,50 +28,39 @@ public class SucursalServiceImpl extends BaseServiceImp<Sucursal,Long> implement
 
     @Override
     @Transactional
-    public Sucursal guardarSucursal(Sucursal sucursal) {
-        var domicilio = sucursal.getDomicilio();
-        if(domicilio.getId() != null){
-            var domicilioBd = domicilioRepository.findById(domicilio.getId());
-            domicilioBd.ifPresent(sucursal::setDomicilio);
-        }else{
-            domicilioRepository.save(domicilio);
-            sucursal.setDomicilio(domicilio);
-        }
-        var empresa = empresaRepository.findById(sucursal.getEmpresa().getId());
-        if(empresa.isEmpty()){
-            throw new RuntimeException("Empresa no encontrada");
-        }
+    public Sucursal create(Sucursal sucursal) {
+        var empresa = empresaRepository.getById(sucursal.getEmpresa().getId());
+       var domicilio=domicilioRepository.save(sucursal.getDomicilio());
+        domicilioRepository.save(domicilio);
+        sucursal.setDomicilio(domicilio);
 
-        return sucursalRepository.save(sucursal);
+        var sucursalPersisted = sucursalRepository.save(sucursal);
+        empresa.getSucursales().add(sucursalPersisted);
+        empresaRepository.save(empresa);
+        return sucursalPersisted;
+
     }
 
     @Override
     @Transactional
-    public Sucursal actualizarSucursal(Long id,Sucursal sucursal) {
-        var sucursalActualizar = sucursalRepository.findById(sucursal.getId());
-        if(sucursalActualizar.isEmpty()){
-            throw new RuntimeException("Sucursal no encontrada: { id: " + id + " }");
-        }
-        var domicilio = domicilioRepository.findById(sucursal.getDomicilio().getId());
+    public Sucursal update(Sucursal sucursal, Long id) {
+        var sucursalActualizar = sucursalRepository.getById(sucursal.getId());
+        var domicilio = domicilioRepository.getById(sucursal.getDomicilio().getId());
         domicilioRepository.save(sucursal.getDomicilio());
-        var empresa = empresaRepository.findById(sucursal.getEmpresa().getId());
-
-        sucursal.setDomicilio(domicilio.get());
-        sucursal.setEmpresa(empresa.get());
+        var empresa = empresaRepository.getById(sucursal.getEmpresa().getId());
+        sucursal.setDomicilio(domicilio);
+        sucursal.setEmpresa(empresa);
+        sucursal.setCategorias(sucursalActualizar.getCategorias());
         return sucursalRepository.save(sucursal);
     }
 
     @Override
     public List<Categoria> findCategoriasBySucursalId(Long sucursalId) {
-        var sucursalExiste = sucursalRepository.findById(sucursalId);
-
-        if(sucursalExiste.isEmpty()){
-            throw new RuntimeException("Sucursal no encontrada: { id: " + sucursalId + " }");
-        }
+        var sucursalExiste = sucursalRepository.getById(sucursalId);
 
         List<Categoria> categorias = sucursalRepository.findCategoriasBySucursalId(sucursalId);
         Set<Categoria> filteredCategorias = new HashSet<>();
-        for (Categoria categoria: categorias){
+        for (Categoria categoria : categorias) {
             if (categoria.getCategoriaPadre() == null) {
                 filteredCategorias.add(categoria);
             }
@@ -89,7 +76,7 @@ public class SucursalServiceImpl extends BaseServiceImp<Sucursal,Long> implement
             Set<Categoria> subcategorias = categoria.getSubCategorias();
             if (!subcategorias.isEmpty()) {
                 Set<Categoria> filteredSubcategorias = new HashSet<>();
-                for (Categoria subcategoria: subcategorias){
+                for (Categoria subcategoria : subcategorias) {
                     System.out.println(subcategoria.getDenominacion());
                     if (categoriasBySucursal.contains(subcategoria)) {
                         System.out.println("está en sucursal");
@@ -111,5 +98,15 @@ public class SucursalServiceImpl extends BaseServiceImp<Sucursal,Long> implement
     @Override
     public List<Sucursal> findAllByEmpresaId(Long id) {
         return sucursalRepository.findAllByEmpresaId(id);
+    }
+
+    @Override
+    @Transactional
+    public void deleteById(Long id) {
+        var sucursal = sucursalRepository.getById(id);
+        if(sucursal.getCategorias().size() > 0) {
+            throw new RuntimeException("No se puede eliminar la sucursal porque tiene categorias asociadas");
+        }
+        sucursalRepository.delete(sucursal);
     }
 }

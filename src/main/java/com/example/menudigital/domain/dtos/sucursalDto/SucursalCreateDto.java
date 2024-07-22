@@ -15,7 +15,13 @@ import java.time.LocalTime;
 @NoArgsConstructor
 @Setter
 @Getter
-public class SucursalShortDto extends BaseDto {
+public class SucursalCreateDto extends BaseDto {
     private String nombre;
-
+    @Schema(type = "string", format = "time", pattern = "HH:mm:ss")
+    private LocalTime horarioApertura;
+    @Schema(type = "string", format = "time", pattern = "HH:mm:ss")
+    private LocalTime horarioCierre;
+    private boolean esCasaMatriz;
+    private DomicilioDto domicilio;
+    private Long idEmpresa;
 }

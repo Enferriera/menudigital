@@ -5,6 +5,7 @@ package com.example.menudigital.presentation.rest;
 import com.example.menudigital.bussines.facade.Impl.SucursalFacadeImp;
 import com.example.menudigital.bussines.services.base.BaseServiceImp;
 import com.example.menudigital.domain.dtos.categoriaDto.CategoriaDto;
+import com.example.menudigital.domain.dtos.sucursalDto.SucursalCreateDto;
 import com.example.menudigital.domain.dtos.sucursalDto.SucursalDto;
 import com.example.menudigital.domain.entities.Sucursal;
 import com.example.menudigital.presentation.rest.Base.BaseControllerImp;
@@ -26,36 +27,34 @@ public class SucursalController extends BaseControllerImp<Sucursal, SucursalDto,
     }
 
 
-    @Override
-    @PostMapping()
-    public ResponseEntity<SucursalDto> create(@RequestBody SucursalDto dto) {
+
+    @PostMapping("/create")
+    public ResponseEntity<SucursalDto> create(@RequestBody SucursalCreateDto dto) {
         return ResponseEntity.ok().body(facade.createSucursal(dto));
     }
 
 
-    @Override
-    @PutMapping("/{id}")
-    public ResponseEntity<SucursalDto> edit( @RequestBody SucursalDto dto,@PathVariable Long id){
-       logger.info("Editing Sucursal "+id);
-       logger.info("Editing Sucursal "+dto.getId());
-        return ResponseEntity.ok().body(facade.updateSucursal(id, dto));
+
+    @PutMapping("/update/{idSucursal}")
+    public ResponseEntity<SucursalDto> edit( @RequestBody SucursalCreateDto dto,@PathVariable Long idSucursal){
+        return ResponseEntity.ok().body(facade.updateSucursal(dto,idSucursal));
     }
 
 
-    @GetMapping("/categorias/{id}")
-    public List<CategoriaDto> getCategoriasBySucursalId(@PathVariable Long id) {
-        return facade.findCategoriasBySucursalId(id);
+    @GetMapping("/categorias/{idSucursal}")
+    public List<CategoriaDto> getCategoriasBySucursalId(@PathVariable Long idSucursal) {
+        return facade.findCategoriasBySucursalId(idSucursal);
     }
 
 
-    @GetMapping("/esCasaMatriz/{id}")
-    public ResponseEntity<Boolean> esCasaMatriz(@PathVariable Long id) {
-        return ResponseEntity.ok().body(facade.existsSucursalByEsCasaMatriz(id));
+    @GetMapping("/esCasaMatriz/{idEmpresa}")
+    public ResponseEntity<Boolean> existeCasaMatriz(@PathVariable Long idEmpresa) {
+        return ResponseEntity.ok().body(facade.existsSucursalByEsCasaMatriz(idEmpresa));
     }
 
 
-    @GetMapping("/porEmpresa/{id}")
-    public List<SucursalDto> getSucursalesByEmpresaId(@PathVariable Long id) {
-        return facade.findAllByEmpresaId(id);
+    @GetMapping("/porEmpresa/{idEmpresa}")
+    public List<SucursalDto> getSucursalesByEmpresaId(@PathVariable Long idEmpresa) {
+        return facade.findAllByEmpresaId(idEmpresa);
     }
 }

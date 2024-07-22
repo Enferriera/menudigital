@@ -4,12 +4,16 @@ import com.example.menudigital.bussines.facade.Base.BaseFacadeImp;
 import com.example.menudigital.bussines.facade.SucursalFacade;
 import com.example.menudigital.bussines.mapper.BaseMapper;
 import com.example.menudigital.bussines.mapper.CategoriaMapper;
+import com.example.menudigital.bussines.mapper.SucursalMapper;
+import com.example.menudigital.bussines.mapper.SucursalMapperImpl;
 import com.example.menudigital.bussines.services.SucursalService;
 import com.example.menudigital.bussines.services.base.BaseService;
 import com.example.menudigital.bussines.services.base.BaseServiceImp;
 import com.example.menudigital.domain.dtos.categoriaDto.CategoriaDto;
+import com.example.menudigital.domain.dtos.sucursalDto.SucursalCreateDto;
 import com.example.menudigital.domain.dtos.sucursalDto.SucursalDto;
 import com.example.menudigital.domain.entities.Sucursal;
+import jakarta.transaction.Transactional;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,6 +30,8 @@ public class SucursalFacadeImp extends BaseFacadeImp<Sucursal, SucursalDto, Long
 
     @Autowired
     CategoriaMapper categoriaMapper;
+    @Autowired
+    private SucursalMapper sucursalMapper;
 
     public SucursalFacadeImp(BaseService<Sucursal, Long> baseService, BaseMapper<Sucursal, SucursalDto> baseMapper) {
         super(baseService, baseMapper);
@@ -33,18 +39,17 @@ public class SucursalFacadeImp extends BaseFacadeImp<Sucursal, SucursalDto, Long
 
 
     @Override
-    public SucursalDto createSucursal(SucursalDto dto) {
-        var sucursal=baseMapper.toEntity(dto);
-        var sucursalPersistida=sucursalService.guardarSucursal(sucursal);
+    public SucursalDto createSucursal(SucursalCreateDto dto) {
+        var sucursal= sucursalMapper.toEntityCreate(dto);
+        var sucursalPersistida=sucursalService.create(sucursal);
         return baseMapper.toDTO(sucursalPersistida);
     }
 
     @Override
-    public SucursalDto updateSucursal(Long id, SucursalDto dto) {
-
-        var sucursal=baseMapper.toEntity(dto);
-
-        var sucursalActualizada=sucursalService.actualizarSucursal(id,sucursal);
+    @Transactional
+    public SucursalDto updateSucursal(SucursalCreateDto dto,Long id ) {
+        var sucursal=sucursalMapper.toEntityCreate(dto);
+        var sucursalActualizada=sucursalService.update(sucursal,id);
         return baseMapper.toDTO(sucursalActualizada);
     }
 

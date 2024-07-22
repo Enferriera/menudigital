@@ -73,12 +73,9 @@ public abstract class BaseServiceImp<E extends Base,ID extends Serializable> imp
     @Override
     public E update(E request, ID id){
         var optionalEntity = baseRepository.getById(id);
-//        if (optionalEntity.isEliminado()){
-//            //logger.error("No se encontro una entidad con el id " + request.getId());
-//            throw new RuntimeException("No se encontro una entidad con el id " + request.getId());
-//        }
+
         var newEntity = baseRepository.save(request);
-        //logger.info("Actualizada entidad {}",newEntity);
+
         return newEntity;
     }
 }
