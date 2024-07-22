@@ -41,10 +41,6 @@ public class SucursalController extends BaseControllerImp<Sucursal, SucursalDto,
     }
 
 
-    @GetMapping("/categorias/{idSucursal}")
-    public List<CategoriaDto> getCategoriasBySucursalId(@PathVariable Long idSucursal) {
-        return facade.findCategoriasBySucursalId(idSucursal);
-    }
 
 
     @GetMapping("/esCasaMatriz/{idEmpresa}")

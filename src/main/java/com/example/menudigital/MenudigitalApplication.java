@@ -185,7 +185,14 @@ public class MenudigitalApplication {
 
             categoriaRepository.save(vinoPorCopa);
 
+
             rufianBarraca.getCategorias().add(menu);
+            rufianBarraca.getCategorias().add(entradas);
+            rufianBarraca.getCategorias().add(tapas);
+            rufianBarraca.getCategorias().add(torresPicadas);
+            rufianBarraca.getCategorias().add(principales);
+            rufianBarraca.getCategorias().add(entrePanes);
+            rufianBarraca.getCategorias().add(postres);
             rufianBarraca.getCategorias().add(cafeteria);
             rufianBarraca.getCategorias().add(cocktails);
             rufianBarraca.getCategorias().add(vinoPorCopa);

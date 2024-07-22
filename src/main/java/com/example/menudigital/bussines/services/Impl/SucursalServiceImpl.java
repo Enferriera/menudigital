@@ -59,36 +59,10 @@ public class SucursalServiceImpl extends BaseServiceImp<Sucursal, Long> implemen
         var sucursalExiste = sucursalRepository.getById(sucursalId);
 
         List<Categoria> categorias = sucursalRepository.findCategoriasBySucursalId(sucursalId);
-        Set<Categoria> filteredCategorias = new HashSet<>();
-        for (Categoria categoria : categorias) {
-            if (categoria.getCategoriaPadre() == null) {
-                filteredCategorias.add(categoria);
-            }
-        }
-        filterSubcategorias(filteredCategorias, categorias);
 
-        return new ArrayList<>(filteredCategorias);
+        return categorias;
     }
 
-    public void filterSubcategorias(Set<Categoria> categorias, List<Categoria> categoriasBySucursal) {
-        for (Categoria categoria : categorias) {
-            System.out.println(categoria.getDenominacion());
-            Set<Categoria> subcategorias = categoria.getSubCategorias();
-            if (!subcategorias.isEmpty()) {
-                Set<Categoria> filteredSubcategorias = new HashSet<>();
-                for (Categoria subcategoria : subcategorias) {
-                    System.out.println(subcategoria.getDenominacion());
-                    if (categoriasBySucursal.contains(subcategoria)) {
-                        System.out.println("está en sucursal");
-                        filteredSubcategorias.add(subcategoria);
-                    }
-                }
-                categoria.setSubCategorias(filteredSubcategorias);
-                filterSubcategorias(filteredSubcategorias, categoriasBySucursal);
-            }
-
-        }
-    }
 
     @Override
     public boolean existsSucursalByEsCasaMatriz(Long id) {

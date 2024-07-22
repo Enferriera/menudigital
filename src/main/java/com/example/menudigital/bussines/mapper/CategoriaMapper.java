@@ -20,7 +20,7 @@ public interface CategoriaMapper extends BaseMapper<Categoria, CategoriaDto>{
 
     @Mappings({
             @Mapping(source = "idSucursales", target = "sucursales", qualifiedByName = "getById"),
-            @Mapping(source = "idCategoriaPadre", target = "categoriaPadre", qualifiedByName = "getById",defaultExpression = "java(null)"),
+            @Mapping(source = "idCategoriaPadre", target = "categoriaPadre", qualifiedByName = "getById",defaultExpression = "java(null)")
     })
     Categoria toEntityCreate(CategoriaCreateDto source);
 

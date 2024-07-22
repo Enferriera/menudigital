@@ -21,20 +21,17 @@ public class Categoria extends Base{
     private String denominacion;
 
 
-
     @OneToMany(mappedBy = "categoria")
     //@JoinColumn(name = "categoria_id")
     @Builder.Default
     private Set<Articulo> articulos = new HashSet<>();
 
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "categoriaPadre")
-    @JsonIgnoreProperties("categoriaPadre")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "categoriaPadre")
     @Builder.Default
     private Set<Categoria> subCategorias = new HashSet<>();
 
     @ManyToOne
     @JoinColumn(name = "categoria_padre_id")
-    @JsonIgnoreProperties("subCategorias")
     private Categoria categoriaPadre;
 
     @ManyToMany(mappedBy = "categorias")

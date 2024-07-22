@@ -15,7 +15,6 @@ import java.util.Set;
 @Setter
 public class CategoriaCreateDto extends BaseDto {
     private String denominacion;
-    private boolean esInsumo;
     private Set<Long> idSucursales;
     private Long idCategoriaPadre;
 
