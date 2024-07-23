@@ -211,7 +211,9 @@ public class MenudigitalApplication {
             papasCerveza.setCategoria(promociones);
 
             promociones.getArticulos().add(papasCerveza);
+            papasCerveza.getAlergenos().add(alergMani);
             categoriaRepository.save(promociones);
+
             articuloRepository.save(papasCerveza);
 
             ImagenArticulo imagenPromo2= ImagenArticulo.builder().name("promo2").url("https://benditorufian.com/resources/items/1110.jpg").build();
