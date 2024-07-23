@@ -1,6 +1,7 @@
 package com.example.menudigital.domain.dtos.alergeno;
 
 import com.example.menudigital.domain.dtos.BaseDto;
+import com.example.menudigital.domain.dtos.ImagenDto;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -12,5 +13,5 @@ import lombok.Setter;
 @Getter
 public class AlergenoDto extends BaseDto {
     private String denominacion;
-    private String imagen;
+    private ImagenDto imagen;
 }

@@ -1,6 +1,7 @@
 package com.example.menudigital.domain.dtos.sucursalDto;
 
 import com.example.menudigital.domain.dtos.BaseDto;
+import com.example.menudigital.domain.dtos.domicilioDto.DomicilioCreateDto;
 import com.example.menudigital.domain.dtos.domicilioDto.DomicilioDto;
 import com.example.menudigital.domain.dtos.empresaDto.EmpresaDto;
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -22,6 +23,6 @@ public class SucursalCreateDto extends BaseDto {
     @Schema(type = "string", format = "time", pattern = "HH:mm:ss")
     private LocalTime horarioCierre;
     private boolean esCasaMatriz;
-    private DomicilioDto domicilio;
+    private DomicilioCreateDto domicilio;
     private Long idEmpresa;
 }

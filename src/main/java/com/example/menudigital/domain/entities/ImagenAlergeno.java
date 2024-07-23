@@ -3,21 +3,15 @@ package com.example.menudigital.domain.entities;
 import jakarta.persistence.Entity;
 import lombok.*;
 import lombok.experimental.SuperBuilder;
-import org.hibernate.envers.Audited;
 
 @Entity
-@NoArgsConstructor
 @AllArgsConstructor
+@NoArgsConstructor
+@Setter
 @Getter
 @ToString
-@Setter
 @SuperBuilder
-
-@Audited
-public class Alergeno extends Base {
-
-    private String denominacion;
-    private ImagenAlergeno imagen;
-
-
+public class ImagenAlergeno  extends Base {
+    private String name;
+    private String url;
 }

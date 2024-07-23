@@ -29,7 +29,7 @@ public class Articulo extends Base {
     protected String codigo;
 
 
-    @OneToMany
+    @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name = "articulo_id")
     @Builder.Default
     @NotAudited

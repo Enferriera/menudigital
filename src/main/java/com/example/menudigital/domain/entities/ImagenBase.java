@@ -1,4 +1,4 @@
-package com.example.menudigital.domain.dtos;
+package com.example.menudigital.domain.entities;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -7,9 +7,9 @@ import lombok.Setter;
 
 @AllArgsConstructor
 @NoArgsConstructor
-@Setter
 @Getter
-public class ImagenDto extends BaseDto {
+@Setter
+public class ImagenBase {
     private String name;
     private String url;
 }

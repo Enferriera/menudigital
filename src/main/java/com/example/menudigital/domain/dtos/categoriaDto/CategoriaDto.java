@@ -15,7 +15,7 @@ import java.util.Set;
 public class CategoriaDto extends BaseDto {
     private String denominacion;
 
-    private Set<ArticuloShortDto> articulos = new HashSet<>();
+   // private Set<ArticuloShortDto> articulos = new HashSet<>();
 
     private Set<CategoriaShortDto> subCategorias = new HashSet<>();
 
