@@ -9,4 +9,5 @@ import java.util.List;
 public interface ArticuloService extends BaseService<Articulo, Long> {
     boolean existsArticuloByAlergeno(Long idAlergeno);
     List<Articulo> findAllBySucursalId( Long idSucusal);
+
 }

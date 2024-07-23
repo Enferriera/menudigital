@@ -17,4 +17,8 @@ public interface ArticuloRepository extends BaseRepository<Articulo, Long> {
 
     @Query("SELECT a FROM Articulo a  JOIN  a.categoria c JOIN c.sucursales s WHERE s.id = :idSucursal AND a.eliminado=false AND s.eliminado=false")
     List<Articulo> findAllBySucursalId(@Param("idSucursal") Long idSucusal);
+
+    boolean existsByCodigo(String nombre);
+
+    Articulo findByCodigoAndEliminadoFalse(String codigo);
 }

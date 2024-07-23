@@ -24,4 +24,24 @@ public class ArticuloServiceImpl extends BaseServiceImp<Articulo,Long> implement
    public List<Articulo> findAllBySucursalId(Long idSucusal){
         return articuloRepository.findAllBySucursalId(idSucusal);
     }
+
+    @Override
+    public Articulo create(Articulo newArticulo){
+        if(articuloRepository.existsByCodigo(newArticulo.getCodigo())){
+            throw new RuntimeException("Ya existe un articulo con el codigo "+newArticulo.getCodigo());
+        }
+        return articuloRepository.save(newArticulo);
+    }
+
+    @Override
+    public Articulo update(Articulo articulo, Long id) {
+        var optionalEntity = baseRepository.getById(id);
+        var articuloPorCodigo = articuloRepository.findByCodigoAndEliminadoFalse(articulo.getCodigo());
+
+        if (articuloPorCodigo != null && articuloPorCodigo.getId() != id) {
+            throw new RuntimeException("Ya existe un articulo con el codigo " + articulo.getCodigo());
+        }
+        return articuloRepository.save(articulo);
+    }
+
 }

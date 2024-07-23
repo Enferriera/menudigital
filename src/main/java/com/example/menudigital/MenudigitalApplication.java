@@ -185,7 +185,7 @@ public class MenudigitalApplication {
 
             categoriaRepository.save(vinoPorCopa);
 
-
+            // ASOCIACION DE CATEGORIAS CON SUCURSALES
             rufianBarraca.getCategorias().add(menu);
             rufianBarraca.getCategorias().add(entradas);
             rufianBarraca.getCategorias().add(tapas);

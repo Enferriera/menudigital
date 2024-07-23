@@ -25,7 +25,7 @@ public class CategoriaController extends BaseControllerImp<Categoria, CategoriaD
 
 
 
-    @DeleteMapping("/bajaPorSucursal/{idCategoria}/{idSucursal}")
+    @PutMapping("/bajaPorSucursal/{idCategoria}/{idSucursal}")
     public void deleteById(@PathVariable Long idCategoria, @PathVariable Long idSucursal) {
         facade.deleteCategoriaInSucursales(idCategoria, idSucursal);
     }

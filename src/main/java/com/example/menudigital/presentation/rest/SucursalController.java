@@ -43,7 +43,7 @@ public class SucursalController extends BaseControllerImp<Sucursal, SucursalDto,
 
 
 
-    @GetMapping("/esCasaMatriz/{idEmpresa}")
+    @GetMapping("/existCasaMatriz/{idEmpresa}")
     public ResponseEntity<Boolean> existeCasaMatriz(@PathVariable Long idEmpresa) {
         return ResponseEntity.ok().body(facade.existsSucursalByEsCasaMatriz(idEmpresa));
     }
