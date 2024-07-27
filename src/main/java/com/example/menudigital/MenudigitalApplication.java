@@ -22,7 +22,7 @@ public class MenudigitalApplication {
 
         System.out.println(" Funcionando ALberto");
     }
-
+/*
     @Autowired
     private CategoriaRepository categoriaRepository;
     @Autowired
@@ -193,8 +193,19 @@ public class MenudigitalApplication {
             rufianBarraca.getCategorias().add(principales);
             rufianBarraca.getCategorias().add(entrePanes);
             rufianBarraca.getCategorias().add(postres);
+            rufianBarraca.getCategorias().add(bebidas);
+            rufianBarraca.getCategorias().add(promociones);
             rufianBarraca.getCategorias().add(cafeteria);
+            rufianBarraca.getCategorias().add(promocionesBienRufianas);
+            rufianBarraca.getCategorias().add(infusionesBebidas);
+            rufianBarraca.getCategorias().add(bakeryBrunch);
             rufianBarraca.getCategorias().add(cocktails);
+            rufianBarraca.getCategorias().add(happyHour);
+            rufianBarraca.getCategorias().add(benditosCoctelesDeAutor);
+            rufianBarraca.getCategorias().add(vermu);
+            rufianBarraca.getCategorias().add(cocteleriaClasica);
+            rufianBarraca.getCategorias().add(medidas);
+            rufianBarraca.getCategorias().add(ginsTonicos);
             rufianBarraca.getCategorias().add(vinoPorCopa);
             sucursalRepository.save(rufianBarraca);
 
@@ -709,5 +720,5 @@ public class MenudigitalApplication {
 
         };
     }
-
+*/
 }
