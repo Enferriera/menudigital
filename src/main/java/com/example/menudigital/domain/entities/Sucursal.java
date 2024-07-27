@@ -19,6 +19,7 @@ import java.util.Set;
 @SuperBuilder
 public class Sucursal extends  Base{
 
+
     private String nombre;
     private LocalTime horarioApertura;
     private LocalTime horarioCierre;
@@ -31,6 +32,14 @@ public class Sucursal extends  Base{
 
     @ManyToOne
     private Empresa empresa;
+
+    @ManyToMany(cascade = CascadeType.REFRESH, fetch = FetchType.LAZY)
+    @ToString.Exclude
+    @JoinTable(name = "sucursal_categoria",
+            joinColumns = @JoinColumn(name = "sucursal_id"),
+            inverseJoinColumns = @JoinColumn(name = "categoria_id"))
+    @Builder.Default
+    private Set<Categoria> categorias = new HashSet<>();
 
 
 }

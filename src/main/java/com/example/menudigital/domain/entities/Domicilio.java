@@ -30,7 +30,4 @@ public class Domicilio extends Base{
     @NotAudited
     private Localidad localidad;
 
-
-
-
 }

@@ -1,0 +1,730 @@
+EMPRESA:
+CREACION DE UNA EMPRESA (POST), endpoint: http://localhost:8090/empresas
+
+JSON DE CREACION:
+ {
+	"nombre": "TIA RADDA",
+	"razonSocial": "LAS MEJORES MILANESAS",
+	"cuit": 30546791,
+	"logo": "https://benditorufian.com/resources/brand.svg"
+}
+
+JSON DEVUELTO:
+{
+	"id": 2,
+	"eliminado": false,
+	"nombre": "TIA RADDA",
+	"razonSocial": "LAS MEJORES MILANESAS",
+	"cuit": 30546791,
+	"logo": "https://benditorufian.com/resources/brand.svg"
+}
+
+-----------------------------------------------------------------
+EDITAR EMPRESA (PUT), endpoint: http://localhost:8090/empresas/1
+
+JSON DE EDICION:
+{
+	"id": 1,
+	"eliminado": false,
+	"nombre": "BENDITO RUFIAN",
+	"razonSocial": "Empresa de Alimentos",
+	"cuit": 30546790,
+	"logo": "https://benditorufian.com/resources/brand.svg"
+}
+
+JSON DEVUELTO:
+{
+	"id": 1,
+	"eliminado": false,
+	"nombre": "BENDITO RUFIAN",
+	"razonSocial": "Empresa de Alimentos",
+	"cuit": 30546790,
+	"logo": "https://benditorufian.com/resources/brand.svg"
+}
+-----------------------------------------------------------------
+GET ALL EMPRESAS : http://localhost:8090/empresas , devuelve un array de empresa.
+JSON EJEMPLO DEVUELTO:
+[
+	{
+		"id": 1,
+		"eliminado": false,
+		"nombre": "BENDITO RUFIAN",
+		"razonSocial": "Venta de Alimentos",
+		"cuit": 30546790,
+		"logo": "https://benditorufian.com/resources/brand.svg"
+	}
+]
+
+----------------------------------------------------------------------------------
+GET ONE EMPRESA : http://localhost:8090/empresas/1 , devuelve una empresa.
+JSON EJEMPLO DEVUELTO:
+{
+	"id": 1,
+	"eliminado": false,
+	"nombre": "BENDITO RUFIAN",
+	"razonSocial": "Venta de Alimentos",
+	"cuit": 30546790,
+	"logo": "https://benditorufian.com/resources/brand.svg"
+}
+
+-------------------------------------------------------------------------------------
+DELETE EMPRESA: http://localhost:8090/empresas/1 
+No devuelve nada.
+
+-------------------------------||||||||||||||||||||||||---------------------------
+SUCURSAL:
+CREACION DE UNA SUCURSAL (POST), endpoint: http://localhost:8090/sucursales/create
+
+JSON DE CREACION:
+
+{
+	"nombre": "BENDITO RUFIAN - Mendoza Plasa Shopping",
+	"horarioApertura": "17:00:00",
+	"horarioCierre": "00:00:00",
+	"esCasaMatriz": false,
+	"domicilio": {
+		"calle": "Bandera de los Andes",
+		"numero": 1833,
+		"cp": 5519,
+		"piso": 0,
+		"nroDpto": 34,
+		"idLocalidad":2
+	},
+	"idEmpresa": 1
+}
+
+JSON DEVUELTO:
+{
+	"id": 2,
+	"eliminado": false,
+	"nombre": "BENDITO RUFIAN - Mendoza Plasa Shopping",
+	"horarioApertura": "17:00:00",
+	"horarioCierre": "00:00:00",
+	"esCasaMatriz": false,
+	"domicilio": {
+		"id": 2,
+		"eliminado": false,
+		"calle": "Bandera de los Andes",
+		"numero": 1833,
+		"cp": 5519,
+		"piso": 0,
+		"nroDpto": 34,
+		"localidad": {
+			"id": 2,
+			"eliminado": false,
+			"nombre": "Guaymallen",
+			"provincia": {
+				"id": 1,
+				"eliminado": false,
+				"nombre": "Mendoza",
+				"pais": {
+					"id": 1,
+					"eliminado": false,
+					"nombre": "Argentina"
+				}
+			}
+		}
+	},
+	"empresa": {
+		"id": 1,
+		"eliminado": false,
+		"nombre": "BENDITO RUFIAN",
+		"razonSocial": "Venta de Alimentos",
+		"cuit": 30546790,
+		"logo": "https://benditorufian.com/resources/brand.svg"
+	},
+	"categorias": []
+}
+
+-----------------------------------------------------------------------------------
+EDITAR SUCURSAL (PUT), endpoint: http://localhost:8090/empresas/1
+
+JSON DE EDICION:
+
+{
+	"id": 1,
+	"eliminado": false,
+	"nombre": "BENDITO RUFIAN - Bandera De los Andes",
+	"horarioApertura": "17:00:00",
+	"horarioCierre": "00:00:00",
+	"esCasaMatriz": true,
+	"domicilio": {
+		"id": 1,
+		"eliminado": false,
+		"calle": "Bandera de los Andes",
+		"numero": 1833,
+		"cp": 5519,
+		"piso": 0,
+		"nroDpto": 34,
+		"localidad": {
+			"id": 2,
+			"eliminado": false,
+			"nombre": "Guaymallen",
+			"provincia": {
+				"id": 1,
+				"eliminado": false,
+				"nombre": "Mendoza",
+				"pais": {
+					"id": 1,
+					"eliminado": false,
+					"nombre": "Argentina"
+				}
+			}
+		}
+	},
+	"idEmpresa": 1
+}
+
+JSON EJEMPLO DEVUELTO:
+
+{
+	"id": 1,
+	"eliminado": false,
+	"nombre": "BENDITO RUFIAN - Bandera De los Andes",
+	"horarioApertura": "17:00:00",
+	"horarioCierre": "00:00:00",
+	"esCasaMatriz": true,
+	"domicilio": {
+		"id": 1,
+		"eliminado": false,
+		"calle": "Bandera de los Andes",
+		"numero": 1833,
+		"cp": 5519,
+		"piso": 0,
+		"nroDpto": 34,
+		"localidad": {
+			"id": 2,
+			"eliminado": false,
+			"nombre": "Guaymallen",
+			"provincia": {
+				"id": 1,
+				"eliminado": false,
+				"nombre": "Mendoza",
+				"pais": {
+					"id": 1,
+					"eliminado": false,
+					"nombre": "Argentina"
+				}
+			}
+		}
+	},
+	"empresa": {
+		"id": 1,
+		"eliminado": false,
+		"nombre": "BENDITO RUFIAN",
+		"razonSocial": "Venta de Alimentos",
+		"cuit": 30546790,
+		"logo": "https://benditorufian.com/resources/brand.svg"
+	},
+	"categorias": [
+		{
+			"id": 2,
+			"eliminado": false,
+			"denominacion": "CAFETERIA"
+		},
+		{
+			"id": 3,
+			"eliminado": false,
+			"denominacion": "COCKTAILS"
+		},
+		{
+			"id": 1,
+			"eliminado": false,
+			"denominacion": "MENU"
+		},
+		{
+			"id": 4,
+			"eliminado": false,
+			"denominacion": "VINO POR COPA"
+		}
+	]
+}
+
+---------------------------------------------------------------------------------
+DELETE SUCURSAL : http://localhost:8090/sucursales/2 
+No devuelve nada
+-------------------------------------------------------------------------------------
+GET SUCURSALES POR EMPRESA: http://localhost:8090/sucursales/porEmpresa/1  
+Devuelve array de Sucursales.
+--------------------------------------------------------------------------------------
+GET EXISTE CASA MATRIZ: http://localhost:8090/sucursales/existCasaMatriz/1
+Devuelve un booleano
+-----------------------------------------------------------------------------------------
+GET SUCURSAL POR IDSUCURSAL: http://localhost:8090/sucursales/1
+Devuelve una sucursal
+
+
+
+EJEMPLO DEVUELTO: 
+{
+	"id": 1,
+	"eliminado": false,
+	"nombre": "BENDITO RUFIAN - LA BARRACA",
+	"horarioApertura": "20:00:00",
+	"horarioCierre": "00:00:00",
+	"esCasaMatriz": true,
+	"domicilio": {
+		"id": 1,
+		"eliminado": false,
+		"calle": "Las Cañas",
+		"numero": 1833,
+		"cp": 5519,
+		"piso": 0,
+		"nroDpto": 34,
+		"localidad": {
+			"id": 2,
+			"eliminado": false,
+			"nombre": "Guaymallen",
+			"provincia": {
+				"id": 1,
+				"eliminado": false,
+				"nombre": "Mendoza",
+				"pais": {
+					"id": 1,
+					"eliminado": false,
+					"nombre": "Argentina"
+				}
+			}
+		}
+	},
+	"empresa": {
+		"id": 1,
+		"eliminado": false,
+		"nombre": "BENDITO RUFIAN",
+		"razonSocial": "Venta de Alimentos",
+		"cuit": 30546790,
+		"logo": "https://benditorufian.com/resources/brand.svg"
+	},
+	"categorias": [
+		{
+			"id": 1,
+			"eliminado": false,
+			"denominacion": "MENU"
+		},
+		{
+			"id": 3,
+			"eliminado": false,
+			"denominacion": "COCKTAILS"
+		},
+		{
+			"id": 9,
+			"eliminado": false,
+			"denominacion": "PRINCIPALES"
+		},
+		{
+			"id": 11,
+			"eliminado": false,
+			"denominacion": "POSTRES"
+		},
+		{
+			"id": 8,
+			"eliminado": false,
+			"denominacion": "TORRES Y PICADAS"
+		},
+		{
+			"id": 10,
+			"eliminado": false,
+			"denominacion": "ENTRE PANES"
+		},
+		{
+			"id": 4,
+			"eliminado": false,
+			"denominacion": "VINO POR COPA"
+		},
+		{
+			"id": 2,
+			"eliminado": false,
+			"denominacion": "CAFETERIA"
+		},
+		{
+			"id": 6,
+			"eliminado": false,
+			"denominacion": "ENTRADAS"
+		},
+		{
+			"id": 7,
+			"eliminado": false,
+			"denominacion": "TAPAS"
+		}
+	]
+}
+
+--------------------------------|||||||||||||||||||||------------------------------
+CATEGORIA
+CREAR UNA CATEGORIA (POST): http://localhost:8090/categorias/create
+
+JSON CREACION:
+{
+    "denominacion":"PANCHOS",
+    "idSucursales":[1],
+    "idCategoriaPadre":1
+}
+
+
+JSON DEVUELTO:
+
+{
+	"id": 23,
+	"eliminado": false,
+	"denominacion": "PANCHOS",
+	"articulos": [],
+	"subCategorias": [],
+	"categoriaPadre": {
+		"id": 1,
+		"eliminado": false,
+		"denominacion": "MENU"
+	},
+	"sucursales": [
+		{
+			"id": 1,
+			"eliminado": false,
+			"nombre": "BENDITO RUFIAN - LA BARRACA"
+		}
+	]
+}
+
+----------------------------------------------------------------------------------
+EDITAR UNA CATEGORIA (PUT): http://localhost:8090/categorias/update/23
+
+JSON EDICION:
+{
+	 "id":23,
+	"eliminado":false,
+	  "denominacion":"PANCHOS",
+    "idSucursales":[
+			1
+		],
+    "idCategoriaPadre":1
+}
+
+JSON DEVUELTO:
+{
+	"id": 23,
+	"eliminado": false,
+	"denominacion": "PANCHOS",
+	"articulos": [],
+	"subCategorias": [],
+	"categoriaPadre": {
+		"id": 1,
+		"eliminado": false,
+		"denominacion": "MENU"
+	},
+	"sucursales": [
+		{
+			"id": 1,
+			"eliminado": false,
+			"nombre": "BENDITO RUFIAN - LA BARRACA"
+		}
+	]
+}
+
+-----------------------------------------------------------------------------------
+GET ONE CATEGORIA: http://localhost:8090/categorias/4
+Devuelve una categoría
+JSON EJEMPLO:
+{
+	"id": 4,
+	"eliminado": false,
+	"denominacion": "VINO POR COPA",
+	"subCategorias": [
+		{
+			"id": 22,
+			"eliminado": false,
+			"denominacion": "VINO TIRADO"
+		}
+	],
+	"categoriaPadre": null,
+	"sucursales": [
+		{
+			"id": 1,
+			"eliminado": false,
+			"nombre": "BENDITO RUFIAN - LA BARRACA"
+		}
+	]
+}
+
+------------------------------------------------------------------------------------------
+
+GET CATEGORIA POR SUCURSAL: http://localhost:8090/categorias/allCategoriasPorSucursal/1
+GET CATEGORIA POR EMPRESA: http://localhost:8090/categorias/allCategoriasPorEmpresa/1
+Ambas Devuelven un array:
+JSON EJEMPLO:
+[
+	{
+		"id": 1,
+		"eliminado": false,
+		"denominacion": "MENU",
+		"articulos": [],
+		"subCategorias": [
+			{
+				"id": 7,
+				"eliminado": false,
+				"denominacion": "TAPAS"
+			},
+			{
+				"id": 11,
+				"eliminado": false,
+				"denominacion": "POSTRES"
+			},
+			{
+				"id": 5,
+				"eliminado": false,
+				"denominacion": "PROMOCIONES"
+			},
+			{
+				"id": 10,
+				"eliminado": false,
+				"denominacion": "ENTRE PANES"
+			},
+			{
+				"id": 9,
+				"eliminado": false,
+				"denominacion": "PRINCIPALES"
+			},
+			{
+				"id": 6,
+				"eliminado": false,
+				"denominacion": "ENTRADAS"
+			},
+			{
+				"id": 8,
+				"eliminado": false,
+				"denominacion": "TORRES Y PICADAS"
+			},
+			{
+				"id": 12,
+				"eliminado": false,
+				"denominacion": "BEBIDAS"
+			}
+		],
+		"categoriaPadre": null,
+		"sucursales": [
+			{
+				"id": 1,
+				"eliminado": false,
+				"nombre": "BENDITO RUFIAN - LA BARRACA"
+			}
+		]
+	}
+]
+
+-----------------------------------------------------------------------------------------
+DESVINCULA UNA CATEGORIA DE UNA SUCURSAL (PUT): http://localhost:8090/categorias/bajaPorSucursal/2/1
+
+----------------------------------------------------------------------------------------------------
+DELETE CATEGORIA: http://localhost:8090/categorias/23
+No devuelve nada
+
+--------------------------------------------||||||||||||||||----------------------------------------
+
+ALERGENOS:
+CREAR ALERGENOS (POST): http://localhost:8090/alergenos
+
+JSON CREACION:
+{
+	"denominacion": "Mani",
+	"imagen": null
+}
+
+JSON DEVUELTO:
+{
+	"id": 3,
+	"eliminado": false,
+	"denominacion": "Trigo",
+	"imagen": {
+		"id":1,
+		"eliminado":false,
+		"name":xxxx,
+		"url":xxxx
+	}
+}
+
+----------------------------------------------------------------------------------------------------
+EDITAR ALREGENO: http://localhost:8090/alergenos/1
+
+JSON EDICION:
+{
+	"id": 3,
+	"eliminado": false,
+	"denominacion": "Trigo",
+	"imagen": {
+		"id":1,
+		"eliminado":false,
+		"name":xxxx,
+		"url":xxxx
+	}
+}
+
+JSON DEVUELTO:
+{
+	"id": 3,
+	"eliminado": false,
+	"denominacion": "Trigo",
+	"imagen": {
+		"id":1,
+		"eliminado":false,
+		"name":xxxx,
+		"url":xxxx
+	}
+}
+----------------------------------------------------------------------------------------------------
+GET ALL ALERGENOS: http://localhost:8090/alergenos
+Devuelve un array
+
+----------------------------------------------------------------------------------------------------
+GET ALERGENO POR ID:http://localhost:8090/alergenos/1
+----------------------------------------------------------------------------------------------------
+DELETE ALERGENO: http://localhost:8090/alergenos/1
+
+------------------------------------------||||||||||||||||||||--------------------------------------
+ARTICULOS:
+CREAR ARTICULO: http://localhost:8090/articulos/create
+
+JSON CREACION:
+{
+	"denominacion": "PAPAS + CERVEZA",
+	"precioVenta": 6300.0,
+	"descripcion": "PROMO VALIDA DE 16 HS. A 21 HS. PAPAS RUSTICAS + 2 PINTAS",
+	"habilitado": true,
+	"codigo": "P0001",
+	"imagenes": [
+		{
+			
+			"name": "promo9",
+			"url": "https://benditorufian.com/resources/items/907.jpg"
+		}
+	],
+	"idCategoria": 5,
+	
+	"idAlergenos": [1]
+}
+
+
+JSON DEVUELTO:
+
+{
+	"id": 38,
+	"eliminado": false,
+	"denominacion": "PAPAS + CERVEZA",
+	"precioVenta": 6300.0,
+	"descripcion": "PROMO VALIDA DE 16 HS. A 21 HS. PAPAS RUSTICAS + 2 PINTAS",
+	"habilitado": true,
+	"codigo": "P0001",
+	"imagenes": [
+		{
+			"id": 23,
+			"eliminado": false,
+			"name": "promo9",
+			"url": "https://benditorufian.com/resources/items/907.jpg"
+		}
+	],
+	"categoria": {
+		"id": 5,
+		"eliminado": false,
+		"denominacion": "PROMOCIONES"
+	},
+	"alergenos": [
+		{
+			"id": 1,
+			"eliminado": false,
+			"denominacion": "Mani",
+			"imagen": null
+		}
+	]
+}
+
+---------------------------------------------------------------------------------------------------
+EDITAR ARTICULO: http://localhost:8090/articulos/update/38
+
+JSON EDICION:
+
+{
+	"id": 38,
+	"eliminado": false,
+	"denominacion": "PAPAS + CERVEZA",
+	"precioVenta": 6300.0,
+	"descripcion": "PROMO VALIDA DE 16 HS. A 21 HS. PAPAS RUSTICAS + 2 PINTAS",
+	"habilitado": true,
+	"codigo": "P0001",
+	"imagenes": [
+		{
+			
+			"name": "promo9",
+			"url": "https://benditorufian.com/resources/items/907.jpg"
+		}
+	],
+	"idCategoria": 4,
+	
+	"idAlergenos": [1]
+
+}
+
+JSON DEVUELTO:
+
+{
+	"id": 38,
+	"eliminado": false,
+	"denominacion": "PAPAS + CERVEZA",
+	"precioVenta": 6300.0,
+	"descripcion": "PROMO VALIDA DE 16 HS. A 21 HS. PAPAS RUSTICAS + 2 PINTAS",
+	"habilitado": true,
+	"codigo": "P0001",
+	"imagenes": [
+		{
+			"id": 24,
+			"eliminado": false,
+			"name": "promo9",
+			"url": "https://benditorufian.com/resources/items/907.jpg"
+		}
+	],
+	"categoria": {
+		"id": 4,
+		"eliminado": false,
+		"denominacion": "VINO POR COPA"
+	},
+	"alergenos": [
+		{
+			"id": 1,
+			"eliminado": false,
+			"denominacion": "Mani",
+			"imagen": null
+		}
+	]
+}
+
+---------------------------------------------------------------------------------------------------
+GET ALL ARTICULOS POR SUCURSAL: http://localhost:8090/articulos/porSucursal/1
+Devuelve un array de artículos por sucursal
+
+JSON DEVUELTO:
+[
+	{
+		"id": 4,
+		"eliminado": false,
+		"denominacion": "PAPAS RUSTICAS",
+		"precioVenta": 5150.0,
+		"descripcion": null,
+		"habilitado": true,
+		"codigo": "E0001",
+		"imagenes": [
+			{
+				"id": 4,
+				"eliminado": false,
+				"name": "entrada1",
+				"url": "https://benditorufian.com/resources/items/139.jpg"
+			}
+		],
+		"categoria": {
+			"id": 6,
+			"eliminado": false,
+			"denominacion": "ENTRADAS"
+		},
+		"alergenos": []
+	}
+]
+
+----------------------------------------------------------------------------------------------------
+GET ARTICULO POR ID: http://localhost:8090/articulos/1
+Devuelve un Articulo
+----------------------------------------------------------------------------------------------------
+DELETE ARTICULO: http://localhost:8090/articulos/38
