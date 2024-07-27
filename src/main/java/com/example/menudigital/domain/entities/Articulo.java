@@ -18,18 +18,18 @@ import java.util.Set;
 @ToString
 @Setter
 @SuperBuilder
-
 @Audited
 public class Articulo extends Base {
 
     protected String denominacion;
     protected Double precioVenta;
+    protected String descripcion;
     @Builder.Default
     protected boolean habilitado = true;
     protected String codigo;
 
 
-    @OneToMany
+    @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name = "articulo_id")
     @Builder.Default
     @NotAudited
@@ -37,11 +37,17 @@ public class Articulo extends Base {
 
 
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "categoria_id")
     @JsonIgnoreProperties("articulos")
-    private Categoria categoria;
+    protected Categoria categoria;
 
 
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JoinTable(name = "articulo_alergenos",
+            joinColumns = @JoinColumn(name = "articulo_id"),
+            inverseJoinColumns = @JoinColumn(name = "alergenos_id"))
+    @Builder.Default
+    protected Set<Alergeno> alergenos=new HashSet<>();
 }
 
