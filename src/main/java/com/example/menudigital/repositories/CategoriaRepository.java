@@ -11,7 +11,11 @@ import java.util.Set;
 
 @Repository
 public interface CategoriaRepository extends BaseRepository<Categoria,Long> {
-    @Query("SELECT c FROM Categoria c JOIN c.sucursales s LEFT JOIN FETCH c.subCategorias sc  WHERE s.id = :idSucursal AND c.eliminado=false AND sc.eliminado=false")
+    @Query("SELECT DISTINCT c FROM Categoria c " +
+            "JOIN c.sucursales s " +
+            "LEFT JOIN FETCH c.subCategorias sc " +
+            "WHERE s.id = :idSucursal AND c.eliminado = false " +
+            "AND (sc IS NULL OR sc.eliminado = false)")
     List<Categoria> findAllCategoriasBySucursalId(@Param("idSucursal") Long idSucursal);
     @Query("SELECT DISTINCT  c FROM Categoria c JOIN c.sucursales s WHERE s.empresa.id = :idEmpresa AND c.eliminado=false")
     List<Categoria> findAllCategoriasByEmpresaId(@Param("idEmpresa") Long idEmpresa);
@@ -19,5 +23,8 @@ public interface CategoriaRepository extends BaseRepository<Categoria,Long> {
     @Override
     @Query("SELECT c FROM Categoria c LEFT JOIN FETCH c.subCategorias sc  WHERE  c.eliminado=false AND (sc.eliminado=false OR sc IS NULL) AND c.id = :id")
     Categoria getById(@Param("id") Long id);
+
+    @Query("SELECT c FROM Categoria c  WHERE  c.eliminado=false  AND c.categoriaPadre.id=:id")
+    List<Categoria> findAllSubCategoriasByCategoriaPadreId(@Param("id") Long id);
 }
 

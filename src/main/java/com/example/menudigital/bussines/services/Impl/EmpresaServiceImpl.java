@@ -49,6 +49,7 @@ public class EmpresaServiceImpl extends BaseServiceImp<Empresa,Long> implements 
     @Transactional
     public void deleteById(Long id){
         var empresa = empresaRepository.getById(id);
+        System.out.println(empresa.getSucursales().size());
         if(empresa.getSucursales().size() > 0) {
             throw new RuntimeException("No se puede eliminar la empresa con el id: " + id + " porque tiene sucursales asociadas");
         }
@@ -66,4 +67,12 @@ public class EmpresaServiceImpl extends BaseServiceImp<Empresa,Long> implements 
         return empresaRepository.save(request);
     }
 
+    @Override
+    public Empresa getById(Long id) {
+        Empresa empresa = empresaRepository.getById(id);
+        if (empresa==null) {
+            throw new RuntimeException("No se existe la empresa con el id: " + id );
+        }
+        return empresaRepository.getById(id);
+    }
 }

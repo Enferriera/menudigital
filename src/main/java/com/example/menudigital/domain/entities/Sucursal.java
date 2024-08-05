@@ -24,6 +24,8 @@ public class Sucursal extends  Base{
     private LocalTime horarioApertura;
     private LocalTime horarioCierre;
     private boolean esCasaMatriz;
+    private double latitud;
+    private double longitud;
 
 
     @OneToOne(cascade = CascadeType.ALL)
