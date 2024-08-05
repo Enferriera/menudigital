@@ -15,7 +15,7 @@ public interface ArticuloRepository extends BaseRepository<Articulo, Long> {
     @Query("SELECT CASE WHEN COUNT(a.id) > 0 THEN TRUE ELSE FALSE END FROM Articulo a JOIN a.alergenos al WHERE al.id = :idAlergeno AND a.eliminado=false")
     boolean existsArticuloByAlergeno(@Param("idAlergeno") Long idAlergeno);
 
-    @Query("SELECT a FROM Articulo a  JOIN  a.categoria c JOIN c.sucursales s WHERE s.id = :idSucursal AND a.eliminado=false AND s.eliminado=false")
+    @Query("SELECT a FROM Articulo a JOIN a.categoria c LEFT JOIN c.categoriaPadre cp JOIN cp.sucursales s WHERE s.id = :idSucursal AND a.eliminado = false AND (c.eliminado = false OR cp.eliminado = false)")
     List<Articulo> findAllBySucursalId(@Param("idSucursal") Long idSucusal);
 
     boolean existsByCodigo(String nombre);
