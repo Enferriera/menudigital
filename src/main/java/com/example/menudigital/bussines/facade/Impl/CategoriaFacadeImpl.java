@@ -36,6 +36,9 @@ public class CategoriaFacadeImpl extends BaseFacadeImp<Categoria, CategoriaDto, 
     @Override
     @Transactional
     public CategoriaDto createCategoria(CategoriaCreateDto dto){
+        if(dto.getIdCategoriaPadre()!=null && !dto.getIdSucursales().isEmpty()) {
+            throw new RuntimeException("No se puede crear una categoria con categoria hija asociada a una sucursal");
+        }
         return baseMapper.toDTO(categoriaService.create(categoriaMapper.toEntityCreate(dto)));
     }
 
@@ -58,4 +61,8 @@ public class CategoriaFacadeImpl extends BaseFacadeImp<Categoria, CategoriaDto, 
         return categoriaMapper.toDTO(categoriaService.update(categoria,id));
     }
 
+    @Override
+    public List<CategoriaDto> findAllSubCategoriasByCategoriaPadreId(Long id) {
+        return baseMapper.toDTOsList(categoriaService.findAllSubCategoriasByCategoriaPadreId(id));
+    }
 }

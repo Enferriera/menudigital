@@ -87,6 +87,8 @@ public class MenudigitalApplication {
                     .nombre("BENDITO RUFIAN - LA BARRACA")
                     .horarioApertura(LocalTime.of(20, 0))
                     .horarioCierre(LocalTime.of(0, 0))
+                    .latitud(-32.914219201011655)
+                    .longitud(-68.82174252380979)
                     .esCasaMatriz(true)
                     .build();
 
@@ -187,25 +189,8 @@ public class MenudigitalApplication {
 
             // ASOCIACION DE CATEGORIAS CON SUCURSALES
             rufianBarraca.getCategorias().add(menu);
-            rufianBarraca.getCategorias().add(entradas);
-            rufianBarraca.getCategorias().add(tapas);
-            rufianBarraca.getCategorias().add(torresPicadas);
-            rufianBarraca.getCategorias().add(principales);
-            rufianBarraca.getCategorias().add(entrePanes);
-            rufianBarraca.getCategorias().add(postres);
-            rufianBarraca.getCategorias().add(bebidas);
-            rufianBarraca.getCategorias().add(promociones);
             rufianBarraca.getCategorias().add(cafeteria);
-            rufianBarraca.getCategorias().add(promocionesBienRufianas);
-            rufianBarraca.getCategorias().add(infusionesBebidas);
-            rufianBarraca.getCategorias().add(bakeryBrunch);
             rufianBarraca.getCategorias().add(cocktails);
-            rufianBarraca.getCategorias().add(happyHour);
-            rufianBarraca.getCategorias().add(benditosCoctelesDeAutor);
-            rufianBarraca.getCategorias().add(vermu);
-            rufianBarraca.getCategorias().add(cocteleriaClasica);
-            rufianBarraca.getCategorias().add(medidas);
-            rufianBarraca.getCategorias().add(ginsTonicos);
             rufianBarraca.getCategorias().add(vinoPorCopa);
             sucursalRepository.save(rufianBarraca);
 
@@ -719,6 +704,6 @@ public class MenudigitalApplication {
 
 
         };
-    }
-*/
+    }*/
+
 }

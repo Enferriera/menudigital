@@ -52,4 +52,10 @@ public class CategoriaController extends BaseControllerImp<Categoria, CategoriaD
     public ResponseEntity<CategoriaDto> updateCategoria(@PathVariable Long id, @RequestBody CategoriaCreateDto dto) {
         return ResponseEntity.ok().body(facade.updateCategoria(id, dto));
     }
+
+
+    @GetMapping("/allSubCategoriasPorCategoriaPadre/{id}")
+    public ResponseEntity<List<CategoriaDto>> getAllSubCategoriaByCategoriaPadreId(@PathVariable Long id) {
+        return ResponseEntity.ok().body(facade.findAllSubCategoriasByCategoriaPadreId(id));
+    }
 }

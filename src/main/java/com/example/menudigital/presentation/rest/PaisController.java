@@ -2,7 +2,7 @@ package com.example.menudigital.presentation.rest;
 
 
 import com.example.menudigital.bussines.facade.Impl.PaisFacadeImp;
-import com.example.menudigital.domain.dtos.domicilioDto.PaisDto;
+import com.example.menudigital.domain.dtos.paisDto.PaisDto;
 import com.example.menudigital.domain.entities.Pais;
 import com.example.menudigital.presentation.rest.Base.BaseControllerImp;
 import org.springframework.web.bind.annotation.CrossOrigin;

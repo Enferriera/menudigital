@@ -6,7 +6,7 @@ import com.example.menudigital.bussines.facade.LocalidadFacade;
 import com.example.menudigital.bussines.mapper.BaseMapper;
 import com.example.menudigital.bussines.services.LocalidadService;
 import com.example.menudigital.bussines.services.base.BaseService;
-import com.example.menudigital.domain.dtos.domicilioDto.LocalidadDto;
+import com.example.menudigital.domain.dtos.localidadDto.LocalidadDto;
 import com.example.menudigital.domain.entities.Localidad;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

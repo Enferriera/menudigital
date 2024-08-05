@@ -13,4 +13,5 @@ public interface CategoriaFacade extends BaseFacade<CategoriaDto, Long> {
     void deleteCategoriaInSucursales(Long idCategoria, Long idSucursal);
     List<CategoriaDto> findAllCategoriasByEmpresaId( Long idEmpresa);
     CategoriaDto updateCategoria(Long id, CategoriaCreateDto dto);
+    List<CategoriaDto> findAllSubCategoriasByCategoriaPadreId(Long id);
 }

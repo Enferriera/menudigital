@@ -4,6 +4,7 @@ import com.example.menudigital.bussines.services.CategoriaService;
 import com.example.menudigital.bussines.services.SucursalService;
 import com.example.menudigital.bussines.services.base.BaseServiceImp;
 import com.example.menudigital.domain.entities.Categoria;
+import com.example.menudigital.domain.entities.Empresa;
 import com.example.menudigital.domain.entities.Sucursal;
 import com.example.menudigital.repositories.CategoriaRepository;
 import com.example.menudigital.repositories.SucursalRepository;
@@ -30,7 +31,7 @@ public class CategoriaServiceImpl extends BaseServiceImp<Categoria,Long> impleme
     public List<Categoria> findAllCategoriasBySucursalId(Long idSucursal){
         return categoriaRepository.findAllCategoriasBySucursalId(idSucursal);
     }
-
+/*
     @Override
     @Transactional
     public Categoria create(Categoria categoria) {
@@ -61,7 +62,44 @@ public class CategoriaServiceImpl extends BaseServiceImp<Categoria,Long> impleme
         }
         return categoriaRepository.save(categoria);
     }
+*/
+@Override
+@Transactional
+public Categoria create(Categoria categoria) {
+    Set<Sucursal> sucursales = new HashSet<>();
 
+    // Verificar y asociar sucursales existentes
+    if (categoria.getSucursales() != null && !categoria.getSucursales().isEmpty()) {
+        for (Sucursal sucursal : categoria.getSucursales()) {
+            Sucursal sucursalBd = sucursalService.getById(sucursal.getId());
+            sucursales.add(sucursalBd);
+        }
+    }
+
+    // Establecer la nueva colección de sucursales en la categoría
+    categoria.setSucursales(sucursales);
+
+    // Guardar la categoría
+    Categoria savedCategoria = categoriaRepository.save(categoria);
+
+    // Actualizar la relación bidireccional para sucursales
+    for (Sucursal sucursal : sucursales) {
+        sucursal.getCategorias().add(savedCategoria);
+        sucursalService.update(sucursal,sucursal.getId()); // Asegúrate de tener un método save en sucursalService
+    }
+
+    // Mapear subcategorías y actualizar la categoría padre si existe
+    if (categoria.getCategoriaPadre() != null) {
+        Categoria categoriaPadre = categoriaRepository.getById(categoria.getCategoriaPadre().getId());
+        savedCategoria.setCategoriaPadre(categoriaPadre);
+        categoriaRepository.save(savedCategoria);
+
+        categoriaPadre.getSubCategorias().add(savedCategoria);
+        categoriaRepository.save(categoriaPadre);
+    }
+
+    return savedCategoria;
+}
     @Override
     @Transactional
     public void deleteCategoriaInSucursales(Long idCategoria, Long idSucursal) {
@@ -176,5 +214,19 @@ public class CategoriaServiceImpl extends BaseServiceImp<Categoria,Long> impleme
             sucursalService.update(sucursal, sucursal.getId());
         }
         categoriaRepository.delete(categoria);
+    }
+
+    @Override
+    public List<Categoria> findAllSubCategoriasByCategoriaPadreId(Long id){
+        return categoriaRepository.findAllSubCategoriasByCategoriaPadreId(id);
+    }
+
+    @Override
+    public Categoria getById(Long id) {
+      Categoria categoria = categoriaRepository.getById(id);
+        if (categoria==null) {
+            throw new RuntimeException("No se existe la categoria con el id: " + id );
+        }
+        return categoriaRepository.getById(id);
     }
 }

@@ -2,7 +2,7 @@ package com.example.menudigital.presentation.rest;
 
 
 import com.example.menudigital.bussines.facade.Impl.LocalidadFacadeImp;
-import com.example.menudigital.domain.dtos.domicilioDto.LocalidadDto;
+import com.example.menudigital.domain.dtos.localidadDto.LocalidadDto;
 import com.example.menudigital.domain.entities.Localidad;
 import com.example.menudigital.presentation.rest.Base.BaseControllerImp;
 import org.slf4j.Logger;

@@ -81,6 +81,8 @@ public class SucursalServiceImpl extends BaseServiceImp<Sucursal, Long> implemen
         if(sucursal.getCategorias().size() > 0) {
             throw new RuntimeException("No se puede eliminar la sucursal porque tiene categorias asociadas");
         }
+        sucursal.setEmpresa(null);
+        sucursalRepository.save(sucursal);
         sucursalRepository.delete(sucursal);
     }
 }
