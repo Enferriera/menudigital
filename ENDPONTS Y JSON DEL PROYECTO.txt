@@ -728,3 +728,25 @@ GET ARTICULO POR ID: http://localhost:8090/articulos/1
 Devuelve un Articulo
 ----------------------------------------------------------------------------------------------------
 DELETE ARTICULO: http://localhost:8090/articulos/38
+
+----------------------------------------|||||||||||||||||||||||||-----------------------------------
+ENDPOINT PARA OBTENER UNA IMAGEN:
+http://localhost:8090/images/{url de imagen}
+
+devuelve un ImageBase={
+			"name":"nombre de la imagen"
+			"url":"nombre almacenado en base"
+}
+
+
+Para hacer un POST de una imagen :
+http://localhost:8090/images/upload
+
+Recibe un archivo MultipartFile devuelve un ImageBase
+
+
+Para subir varias imágenes a la vez:
+http://localhost:8090/images/uploadAll
+
+Recibe un array de MultipartFile y devuelve un array de ImageBase
+
