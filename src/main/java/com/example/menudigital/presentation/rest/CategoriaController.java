@@ -4,6 +4,7 @@ package com.example.menudigital.presentation.rest;
 import com.example.menudigital.bussines.facade.Impl.CategoriaFacadeImpl;
 import com.example.menudigital.domain.dtos.categoriaDto.CategoriaCreateDto;
 import com.example.menudigital.domain.dtos.categoriaDto.CategoriaDto;
+import com.example.menudigital.domain.dtos.categoriaDto.CategoriaShortDto;
 import com.example.menudigital.domain.entities.Categoria;
 import com.example.menudigital.presentation.rest.Base.BaseControllerImp;
 import org.springframework.http.ResponseEntity;
@@ -37,9 +38,15 @@ public class CategoriaController extends BaseControllerImp<Categoria, CategoriaD
     }
 
 
+    //OBTIENE SOLO CATEGORIAS PADRE DE UNA SUCURSAL
+    @GetMapping("/allCategoriasPadrePorSucursal/{idSucursal}")
+    public ResponseEntity<List<CategoriaDto>> getAllCategoriaPadreBySucursalId(@PathVariable Long idSucursal){
+        return ResponseEntity.ok().body(facade.findAllCategoriasPadreBySucursalId(idSucursal));
+    }
 
+    //OBTIENE TODAS LAS CATEGORIAS DE UNA SUCURSAL
     @GetMapping("/allCategoriasPorSucursal/{idSucursal}")
-    public ResponseEntity<List<CategoriaDto>> getAllCategoriaBySucursalId(@PathVariable Long idSucursal){
+    public ResponseEntity<List<CategoriaShortDto>> getAllCategoriaBySucursalId(@PathVariable Long idSucursal){
         return ResponseEntity.ok().body(facade.findAllCategoriasBySucursalId(idSucursal));
     }
 

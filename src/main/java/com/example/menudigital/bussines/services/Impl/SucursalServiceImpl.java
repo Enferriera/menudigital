@@ -4,6 +4,7 @@ import com.example.menudigital.bussines.services.SucursalService;
 import com.example.menudigital.bussines.services.base.BaseServiceImp;
 import com.example.menudigital.domain.entities.Categoria;
 import com.example.menudigital.domain.entities.Sucursal;
+import com.example.menudigital.repositories.CategoriaRepository;
 import com.example.menudigital.repositories.DomicilioRepository;
 import com.example.menudigital.repositories.EmpresaRepository;
 import com.example.menudigital.repositories.SucursalRepository;
@@ -25,6 +26,9 @@ public class SucursalServiceImpl extends BaseServiceImp<Sucursal, Long> implemen
     @Autowired
     private EmpresaRepository empresaRepository;
 
+    @Autowired
+    private CategoriaRepository categoriaRepository;
+
 
     @Override
     @Transactional
@@ -34,8 +38,17 @@ public class SucursalServiceImpl extends BaseServiceImp<Sucursal, Long> implemen
         domicilioRepository.save(domicilio);
         sucursal.setDomicilio(domicilio);
 
+        List<Categoria> categorias = categoriaRepository.findAllCategoriasByEmpresaId(sucursal.getEmpresa().getId());
+
         var sucursalPersisted = sucursalRepository.save(sucursal);
+        //Asociamos las categorias de la empresa a la nueva sucursal
+        for(Categoria categoria: categorias) {
+            categoria.getSucursales().add(sucursalPersisted);
+            categoriaRepository.save(categoria);
+            sucursalPersisted.getCategorias().add(categoria);
+        }
         empresa.getSucursales().add(sucursalPersisted);
+        sucursalRepository.save(sucursal);
         empresaRepository.save(empresa);
         return sucursalPersisted;
 

@@ -27,4 +27,5 @@ public class SucursalCreateDto extends BaseDto {
     private Long idEmpresa;
     private double latitud;
     private double longitud;
+    private String logo;
 }

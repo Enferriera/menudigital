@@ -5,6 +5,8 @@ import com.example.menudigital.domain.dtos.articuloDto.ArticuloCreateDto;
 import com.example.menudigital.domain.dtos.articuloDto.ArticuloDto;
 import com.example.menudigital.domain.entities.Articulo;
 import com.example.menudigital.presentation.rest.Base.BaseControllerImp;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -21,6 +23,21 @@ public class ArticuloController extends BaseControllerImp<Articulo, ArticuloDto,
     @GetMapping("/porSucursal/{idSucursal}")
     public ResponseEntity<List<ArticuloDto>> getArticulosPorSucursal(@PathVariable Long idSucursal) {
         return ResponseEntity.ok().body(facade.findAllBySucursalId(idSucursal));
+    }
+
+    @GetMapping("/porCategoria/{idCategoria}")
+    public ResponseEntity<List<ArticuloDto>> getArticulosPorCategoria(@PathVariable Long idCategoria) {
+        return ResponseEntity.ok().body(facade.findAllByCategoriaId(idCategoria));
+    }
+
+    @GetMapping("/pagedPorSucursal/{idSucursal}")
+    public ResponseEntity<Page<ArticuloDto>> getArticulosPorSucursalPaged(@PathVariable Long idSucursal, Pageable pageable) {
+        return ResponseEntity.ok().body(facade.findAllBySucursalIdPaged(idSucursal, pageable));
+    }
+
+    @GetMapping("/pagedPorCategoria/{idCategoria}")
+    public ResponseEntity<Page<ArticuloDto>> getArticulosPorCategoriaPaged(@PathVariable Long idCategoria, Pageable pageable) {
+        return ResponseEntity.ok().body(facade.findAllByCategoriaIdPaged(idCategoria, pageable));
     }
 
     @PostMapping("/create")

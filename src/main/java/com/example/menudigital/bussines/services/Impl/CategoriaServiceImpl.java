@@ -10,6 +10,7 @@ import com.example.menudigital.repositories.CategoriaRepository;
 import com.example.menudigital.repositories.SucursalRepository;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Service;
 
 import java.util.HashSet;
@@ -28,41 +29,10 @@ public class CategoriaServiceImpl extends BaseServiceImp<Categoria,Long> impleme
     private SucursalService sucursalService;
 
     @Override
-    public List<Categoria> findAllCategoriasBySucursalId(Long idSucursal){
-        return categoriaRepository.findAllCategoriasBySucursalId(idSucursal);
+    public List<Categoria> findAllCategoriasPadreBySucursalId(Long idSucursal){
+        return categoriaRepository.findAllCategoriasPadreBySucursalId(idSucursal);
     }
-/*
-    @Override
-    @Transactional
-    public Categoria create(Categoria categoria) {
-        Set<Sucursal> sucursales = new HashSet<>();
 
-        // Verificar y asociar sucursales existentes
-        if (categoria.getSucursales() != null && !categoria.getSucursales().isEmpty()) {
-            for (Sucursal sucursal : categoria.getSucursales()) {
-                Sucursal sucursalBd = sucursalService.getById(sucursal.getId());
-                sucursalBd.getCategorias().add(categoria);
-                sucursales.add(sucursalBd);
-            }
-        }
-
-        // Establecer la nueva colección de sucursales en la categoría
-        categoria.setSucursales(sucursales);
-
-        // Mapear subcategorías y guardar la categoría
-
-        if(categoria.getCategoriaPadre()!= null){
-            Categoria categoriaPadre = categoriaRepository.getById(categoria.getCategoriaPadre().getId());
-
-            categoria.setCategoriaPadre(categoriaPadre);
-            var categoriaHija=categoriaRepository.save(categoria);
-            categoriaPadre.getSubCategorias().add(categoria);
-            categoriaRepository.save(categoriaPadre);
-            return categoriaHija;
-        }
-        return categoriaRepository.save(categoria);
-    }
-*/
 @Override
 @Transactional
 public Categoria create(Categoria categoria) {
@@ -228,5 +198,10 @@ public Categoria create(Categoria categoria) {
             throw new RuntimeException("No se existe la categoria con el id: " + id );
         }
         return categoriaRepository.getById(id);
+    }
+
+    @Override
+    public  List<Categoria> findAllCategoriasBySucursalId(Long idSucursal){
+        return categoriaRepository.findAllCategoriasBySucursalId(idSucursal);
     }
 }

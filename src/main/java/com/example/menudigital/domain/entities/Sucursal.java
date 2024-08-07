@@ -26,6 +26,7 @@ public class Sucursal extends  Base{
     private boolean esCasaMatriz;
     private double latitud;
     private double longitud;
+    private String logo;
 
 
     @OneToOne(cascade = CascadeType.ALL)

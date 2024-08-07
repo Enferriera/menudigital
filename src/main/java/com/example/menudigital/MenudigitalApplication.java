@@ -22,7 +22,7 @@ public class MenudigitalApplication {
 
         System.out.println(" Funcionando ALberto");
     }
-
+/*
     @Autowired
     private CategoriaRepository categoriaRepository;
     @Autowired
@@ -143,17 +143,18 @@ public class MenudigitalApplication {
             menu.getSubCategorias().add(entradas);
             menu.getSubCategorias().add(tapas);
             menu.getSubCategorias().add(torresPicadas);
-			menu.getSubCategorias().add(principales);
+            menu.getSubCategorias().add(principales);
             menu.getSubCategorias().add(entrePanes);
             menu.getSubCategorias().add(postres);
             menu.getSubCategorias().add(bebidas);
+            menu.getSubCategorias().add(promociones);
             categoriaRepository.save(menu);
 
-            Categoria promocionesBienRufianas= Categoria.builder().denominacion("PROMOCIONES BIEN RUFINAS").categoriaPadre(cafeteria).build();
+            Categoria promocionesBienRufianas = Categoria.builder().denominacion("PROMOCIONES BIEN RUFINAS").categoriaPadre(cafeteria).build();
             categoriaRepository.save(promocionesBienRufianas);
             Categoria infusionesBebidas = Categoria.builder().denominacion("INFUSIONES Y BEBIDAS").categoriaPadre(cafeteria).build();
             categoriaRepository.save(infusionesBebidas);
-            Categoria bakeryBrunch= Categoria.builder().denominacion("BAKERY / BRUNCH").categoriaPadre(cafeteria).build();
+            Categoria bakeryBrunch = Categoria.builder().denominacion("BAKERY / BRUNCH").categoriaPadre(cafeteria).build();
             categoriaRepository.save(bakeryBrunch);
 
             cafeteria.getSubCategorias().add(promocionesBienRufianas);
@@ -165,11 +166,11 @@ public class MenudigitalApplication {
             categoriaRepository.save(happyHour);
             Categoria benditosCoctelesDeAutor = Categoria.builder().denominacion("BENDITOS COCTELES DE AUTOR").categoriaPadre(cocktails).build();
             categoriaRepository.save(benditosCoctelesDeAutor);
-            Categoria vermu= Categoria.builder().denominacion("VERMU").categoriaPadre(cocktails).build();
+            Categoria vermu = Categoria.builder().denominacion("VERMU").categoriaPadre(cocktails).build();
             categoriaRepository.save(vermu);
             Categoria cocteleriaClasica = Categoria.builder().denominacion("COCTELERIA CLASICA").categoriaPadre(cocktails).build();
             categoriaRepository.save(cocteleriaClasica);
-            Categoria medidas= Categoria.builder().denominacion("MEDIDAS").categoriaPadre(cocktails).build();
+            Categoria medidas = Categoria.builder().denominacion("MEDIDAS").categoriaPadre(cocktails).build();
             categoriaRepository.save(medidas);
             Categoria ginsTonicos = Categoria.builder().denominacion("GINS Y TONICOS").categoriaPadre(cocktails).build();
             categoriaRepository.save(ginsTonicos);
@@ -182,16 +183,34 @@ public class MenudigitalApplication {
             cocktails.getSubCategorias().add(ginsTonicos);
             categoriaRepository.save(cocktails);
 
-            Categoria vinoTirado= Categoria.builder().denominacion("VINO TIRADO").categoriaPadre(vinoPorCopa).build();
+            Categoria vinoTirado = Categoria.builder().denominacion("VINO TIRADO").categoriaPadre(vinoPorCopa).build();
             categoriaRepository.save(vinoTirado);
 
             categoriaRepository.save(vinoPorCopa);
 
             // ASOCIACION DE CATEGORIAS CON SUCURSALES
             rufianBarraca.getCategorias().add(menu);
+            rufianBarraca.getCategorias().add(entradas);
+            rufianBarraca.getCategorias().add(tapas);
+            rufianBarraca.getCategorias().add(torresPicadas);
+            rufianBarraca.getCategorias().add(principales);
+            rufianBarraca.getCategorias().add(entrePanes);
+            rufianBarraca.getCategorias().add(postres);
+            rufianBarraca.getCategorias().add(bebidas);
             rufianBarraca.getCategorias().add(cafeteria);
+            rufianBarraca.getCategorias().add(promocionesBienRufianas);
+            rufianBarraca.getCategorias().add(infusionesBebidas);
+            rufianBarraca.getCategorias().add(bakeryBrunch);
             rufianBarraca.getCategorias().add(cocktails);
+            rufianBarraca.getCategorias().add(happyHour);
+            rufianBarraca.getCategorias().add(benditosCoctelesDeAutor);
+            rufianBarraca.getCategorias().add(vermu);
+            rufianBarraca.getCategorias().add(cocteleriaClasica);
+            rufianBarraca.getCategorias().add(medidas);
+            rufianBarraca.getCategorias().add(ginsTonicos);
+            rufianBarraca.getCategorias().add(vinoTirado);
             rufianBarraca.getCategorias().add(vinoPorCopa);
+            rufianBarraca.getCategorias().add(promociones);
             sucursalRepository.save(rufianBarraca);
 
             logger.info("----------------Generando Articulos---------------------");
@@ -704,6 +723,6 @@ public class MenudigitalApplication {
 
 
         };
-    }
+    }*/
 
 }
