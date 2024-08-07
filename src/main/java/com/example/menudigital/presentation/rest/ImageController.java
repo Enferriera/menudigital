@@ -3,7 +3,9 @@ package com.example.menudigital.presentation.rest;
 import com.example.menudigital.bussines.services.ImageService;
 import com.example.menudigital.domain.entities.ImagenBase;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.ClassPathResource;
+import org.springframework.core.io.FileSystemResource;
 import org.springframework.core.io.Resource;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -13,6 +15,8 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -21,6 +25,9 @@ import java.util.Map;
 @RequestMapping("/images")
 @CrossOrigin(origins = "*")
 public class ImageController {
+
+    @Value("${image.folder.path}")
+    private String imageFolderPath;
 
     @Autowired
     private ImageService imageService;
@@ -57,10 +64,11 @@ public class ImageController {
     }
 
 
-    @GetMapping("/{filename:.+}")
+   @GetMapping("/{filename:.+}")
     public ResponseEntity<Resource> serveFile(@PathVariable String filename) {
         try {
-            Resource file = new ClassPathResource("images/" + filename);
+            Path filePath = Paths.get(imageFolderPath, filename);
+            Resource file = new FileSystemResource(filePath);
             if (file.exists() && file.isReadable()) {
                 String fileExtension = getFileExtension(filename);
                 MediaType mediaType = mediaTypeMap.getOrDefault(fileExtension, MediaType.APPLICATION_OCTET_STREAM);

@@ -8,11 +8,16 @@ import com.example.menudigital.bussines.services.CategoriaService;
 import com.example.menudigital.bussines.services.base.BaseService;
 import com.example.menudigital.domain.dtos.categoriaDto.CategoriaCreateDto;
 import com.example.menudigital.domain.dtos.categoriaDto.CategoriaDto;
+import com.example.menudigital.domain.dtos.categoriaDto.CategoriaShortDto;
 import com.example.menudigital.domain.dtos.domicilioDto.DomicilioDto;
+import com.example.menudigital.domain.entities.Articulo;
 import com.example.menudigital.domain.entities.Categoria;
 import com.example.menudigital.domain.entities.Domicilio;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -29,16 +34,13 @@ public class CategoriaFacadeImpl extends BaseFacadeImp<Categoria, CategoriaDto, 
     private CategoriaMapper categoriaMapper;
 
     @Override
-    public List<CategoriaDto> findAllCategoriasBySucursalId(Long idSucursal) {
-        return baseMapper.toDTOsList(categoriaService.findAllCategoriasBySucursalId(idSucursal));
+    public List<CategoriaDto> findAllCategoriasPadreBySucursalId(Long idSucursal) {
+        return baseMapper.toDTOsList(categoriaService.findAllCategoriasPadreBySucursalId(idSucursal));
     }
 
     @Override
     @Transactional
     public CategoriaDto createCategoria(CategoriaCreateDto dto){
-        if(dto.getIdCategoriaPadre()!=null && !dto.getIdSucursales().isEmpty()) {
-            throw new RuntimeException("No se puede crear una categoria con categoria hija asociada a una sucursal");
-        }
         return baseMapper.toDTO(categoriaService.create(categoriaMapper.toEntityCreate(dto)));
     }
 
@@ -65,4 +67,10 @@ public class CategoriaFacadeImpl extends BaseFacadeImp<Categoria, CategoriaDto, 
     public List<CategoriaDto> findAllSubCategoriasByCategoriaPadreId(Long id) {
         return baseMapper.toDTOsList(categoriaService.findAllSubCategoriasByCategoriaPadreId(id));
     }
+
+    @Override
+    public  List<CategoriaShortDto> findAllCategoriasBySucursalId(Long idSucursal){
+        return categoriaMapper.toShortDTOs(categoriaService.findAllCategoriasBySucursalId(idSucursal));
+    }
+
 }
