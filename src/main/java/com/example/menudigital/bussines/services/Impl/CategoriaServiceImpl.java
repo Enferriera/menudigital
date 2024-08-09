@@ -204,4 +204,9 @@ public Categoria create(Categoria categoria) {
     public  List<Categoria> findAllCategoriasBySucursalId(Long idSucursal){
         return categoriaRepository.findAllCategoriasBySucursalId(idSucursal);
     }
+
+    @Override
+    public  List<Categoria> findSubcategoriasBySucursalId( Long idSucursal){
+        return categoriaRepository.findSubcategoriasBySucursalId(idSucursal);
+    }
 }
