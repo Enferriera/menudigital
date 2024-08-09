@@ -13,4 +13,6 @@ public interface CategoriaService extends BaseService<Categoria, Long> {
     List<Categoria> findAllSubCategoriasByCategoriaPadreId(Long id);
 
     List<Categoria> findAllCategoriasBySucursalId(Long idSucursal);
+
+    List<Categoria> findSubcategoriasBySucursalId( Long idSucursal);
 }

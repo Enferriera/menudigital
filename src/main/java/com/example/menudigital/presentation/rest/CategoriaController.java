@@ -61,8 +61,14 @@ public class CategoriaController extends BaseControllerImp<Categoria, CategoriaD
     }
 
 
-    @GetMapping("/allSubCategoriasPorCategoriaPadre/{id}")
-    public ResponseEntity<List<CategoriaDto>> getAllSubCategoriaByCategoriaPadreId(@PathVariable Long id) {
-        return ResponseEntity.ok().body(facade.findAllSubCategoriasByCategoriaPadreId(id));
+    @GetMapping("/allSubCategoriasPorCategoriaPadre/{idCategoriaPadre}")
+    public ResponseEntity<List<CategoriaDto>> getAllSubCategoriaByCategoriaPadreId(@PathVariable Long idCategoriaPadre) {
+        return ResponseEntity.ok().body(facade.findAllSubCategoriasByCategoriaPadreId(idCategoriaPadre));
     }
+
+    @GetMapping("/allSubCategoriasPorSucursal/{idSucursal}")
+    public ResponseEntity<List<CategoriaDto>> getAllSubCategoriaBySucursalId(@PathVariable Long idSucursal) {
+        return ResponseEntity.ok().body(facade.findSubcategoriasBySucursalId(idSucursal));
+    }
+
 }

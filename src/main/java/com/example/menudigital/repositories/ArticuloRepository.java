@@ -40,4 +40,4 @@ public interface ArticuloRepository extends BaseRepository<Articulo, Long> {
     @Query("SELECT a FROM Articulo a JOIN a.categoria c WHERE c.id = :idCategoria AND a.eliminado = false AND c.eliminado = false")
     Page<Articulo> findAllByCategoriaIdPaged(@Param("idCategoria") Long idCategoria, Pageable pageable);
 
-}
+    }

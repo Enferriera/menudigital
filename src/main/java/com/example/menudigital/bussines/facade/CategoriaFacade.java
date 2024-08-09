@@ -16,4 +16,5 @@ public interface CategoriaFacade extends BaseFacade<CategoriaDto, Long> {
     CategoriaDto updateCategoria(Long id, CategoriaCreateDto dto);
     List<CategoriaDto> findAllSubCategoriasByCategoriaPadreId(Long id);
     List<CategoriaShortDto> findAllCategoriasBySucursalId(Long idSucursal);
+    List<CategoriaDto> findSubcategoriasBySucursalId( Long idSucursal);
 }
