@@ -70,7 +70,7 @@ public class SucursalServiceImpl extends BaseServiceImp<Sucursal, Long> implemen
         var empresa = empresaRepository.getById(sucursal.getEmpresa().getId());
         sucursal.setDomicilio(domicilio);
         sucursal.setEmpresa(empresa);
-        if(!sucursalActualizar.getLogo().equals(null)) {
+        if(!sucursalActualizar.getLogo().equals(null) && !sucursalActualizar.getLogo().equals(sucursal.getLogo())) {
             Path filePath = Paths.get(uploadDir + sucursalActualizar.getLogo());
             imageService.deleteImage(filePath);
         }

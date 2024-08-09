@@ -72,7 +72,7 @@ public class EmpresaServiceImpl extends BaseServiceImp<Empresa,Long> implements 
         if(entityByCuit.isPresent() && !entityByCuit.get().getId().equals(id)) {
             throw new RuntimeException("Ya existe una empresa con el nummero de CUIT: " + request.getCuit());
         }
-        if(!optionalEntity.getLogo().equals(null)) {
+        if(!optionalEntity.getLogo().equals(null) && !optionalEntity.getLogo().equals(request.getLogo())) {
             Path filePath = Paths.get(uploadDir + optionalEntity.getLogo());
             imageService.deleteImage(filePath);
         }
