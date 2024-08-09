@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/paises")
 @CrossOrigin(origins={" https://dashboard-menu-project.vercel.app/",
-        "link: http://localhost:5173"})
+        "http://localhost:5173"})
 public class PaisController extends BaseControllerImp<Pais, PaisDto,Long, PaisFacadeImp> {
 
     public PaisController(PaisFacadeImp facade) {
