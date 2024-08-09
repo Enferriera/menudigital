@@ -11,7 +11,8 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/domicilios")
-@CrossOrigin(origins="*")
+@CrossOrigin(origins={" https://dashboard-menu-project.vercel.app/",
+        "link: http://localhost:5173"})
 public class DomicilioController extends BaseControllerImp<Domicilio, DomicilioDto,Long, DomicilioFacadeImp> {
     public DomicilioController(DomicilioFacadeImp facade) {
         super(facade);

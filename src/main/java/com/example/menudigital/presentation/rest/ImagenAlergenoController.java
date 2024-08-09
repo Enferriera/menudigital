@@ -6,7 +6,8 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/imagenAlergenos")
-@CrossOrigin(origins="*")
+@CrossOrigin(origins={" https://dashboard-menu-project.vercel.app/",
+        "link: http://localhost:5173"})
 public class ImagenAlergenoController {
 
     @Autowired
