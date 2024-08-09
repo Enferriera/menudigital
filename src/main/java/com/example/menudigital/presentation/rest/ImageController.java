@@ -23,7 +23,8 @@ import java.util.Map;
 
 @RestController
 @RequestMapping("/images")
-@CrossOrigin(origins = "*")
+@CrossOrigin(origins={" https://dashboard-menu-project.vercel.app/",
+        "link: http://localhost:5173"})
 public class ImageController {
 
     @Value("${image.folder.path}")
