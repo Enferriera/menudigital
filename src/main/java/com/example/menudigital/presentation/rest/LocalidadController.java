@@ -14,8 +14,8 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/localidades")
-@CrossOrigin(origins={" https://dashboard-menu-project.vercel.app/",
-        "link: http://localhost:5173"})
+@CrossOrigin(origins = {"https://dashboard-menu-project.vercel.app", "http://localhost:5173"})
+
 public class LocalidadController extends BaseControllerImp<Localidad, LocalidadDto, Long, LocalidadFacadeImp> {
 
     public LocalidadController(LocalidadFacadeImp facade) {
