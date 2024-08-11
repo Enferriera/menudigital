@@ -5,6 +5,9 @@ import com.example.menudigital.bussines.services.base.BaseServiceImp;
 import com.example.menudigital.domain.entities.Articulo;
 import com.example.menudigital.repositories.ArticuloRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -42,6 +45,22 @@ public class ArticuloServiceImpl extends BaseServiceImp<Articulo,Long> implement
             throw new RuntimeException("Ya existe un articulo con el codigo " + articulo.getCodigo());
         }
         return articuloRepository.save(articulo);
+    }
+
+    @Override
+    public Page<Articulo> findAllBySucursalIdPaged(Long idSucursal, Pageable pageable){
+        return articuloRepository.findAllBySucursalIdPaged(idSucursal,pageable);
+    }
+
+
+    @Override
+    public List<Articulo> findAllByCategoriaId(Long idCategoria){
+        return articuloRepository.findAllByCategoriaId(idCategoria);
+    }
+
+    @Override
+    public Page<Articulo> findAllByCategoriaIdPaged(Long idCategoria, Pageable pageable){
+        return articuloRepository.findAllByCategoriaIdPaged(idCategoria, pageable);
     }
 
 }

@@ -2,6 +2,7 @@ package com.example.menudigital;
 
 import com.example.menudigital.domain.entities.*;
 import com.example.menudigital.repositories.*;
+import io.github.cdimascio.dotenv.Dotenv;
 import jakarta.transaction.Transactional;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -18,6 +19,8 @@ public class MenudigitalApplication {
     private static final Logger logger = LoggerFactory.getLogger(MenudigitalApplication.class);
 
     public static void main(String[] args) {
+        Dotenv dotenv = Dotenv.load();
+        dotenv.entries().forEach(e -> System.setProperty(e.getKey(), e.getValue()));
         SpringApplication.run(MenudigitalApplication.class, args);
 
         System.out.println(" Funcionando ALberto");
@@ -87,6 +90,8 @@ public class MenudigitalApplication {
                     .nombre("BENDITO RUFIAN - LA BARRACA")
                     .horarioApertura(LocalTime.of(20, 0))
                     .horarioCierre(LocalTime.of(0, 0))
+                    .latitud(-32.914219201011655)
+                    .longitud(-68.82174252380979)
                     .esCasaMatriz(true)
                     .build();
 
@@ -141,17 +146,18 @@ public class MenudigitalApplication {
             menu.getSubCategorias().add(entradas);
             menu.getSubCategorias().add(tapas);
             menu.getSubCategorias().add(torresPicadas);
-			menu.getSubCategorias().add(principales);
+            menu.getSubCategorias().add(principales);
             menu.getSubCategorias().add(entrePanes);
             menu.getSubCategorias().add(postres);
             menu.getSubCategorias().add(bebidas);
+            menu.getSubCategorias().add(promociones);
             categoriaRepository.save(menu);
 
-            Categoria promocionesBienRufianas= Categoria.builder().denominacion("PROMOCIONES BIEN RUFINAS").categoriaPadre(cafeteria).build();
+            Categoria promocionesBienRufianas = Categoria.builder().denominacion("PROMOCIONES BIEN RUFINAS").categoriaPadre(cafeteria).build();
             categoriaRepository.save(promocionesBienRufianas);
             Categoria infusionesBebidas = Categoria.builder().denominacion("INFUSIONES Y BEBIDAS").categoriaPadre(cafeteria).build();
             categoriaRepository.save(infusionesBebidas);
-            Categoria bakeryBrunch= Categoria.builder().denominacion("BAKERY / BRUNCH").categoriaPadre(cafeteria).build();
+            Categoria bakeryBrunch = Categoria.builder().denominacion("BAKERY / BRUNCH").categoriaPadre(cafeteria).build();
             categoriaRepository.save(bakeryBrunch);
 
             cafeteria.getSubCategorias().add(promocionesBienRufianas);
@@ -163,11 +169,11 @@ public class MenudigitalApplication {
             categoriaRepository.save(happyHour);
             Categoria benditosCoctelesDeAutor = Categoria.builder().denominacion("BENDITOS COCTELES DE AUTOR").categoriaPadre(cocktails).build();
             categoriaRepository.save(benditosCoctelesDeAutor);
-            Categoria vermu= Categoria.builder().denominacion("VERMU").categoriaPadre(cocktails).build();
+            Categoria vermu = Categoria.builder().denominacion("VERMU").categoriaPadre(cocktails).build();
             categoriaRepository.save(vermu);
             Categoria cocteleriaClasica = Categoria.builder().denominacion("COCTELERIA CLASICA").categoriaPadre(cocktails).build();
             categoriaRepository.save(cocteleriaClasica);
-            Categoria medidas= Categoria.builder().denominacion("MEDIDAS").categoriaPadre(cocktails).build();
+            Categoria medidas = Categoria.builder().denominacion("MEDIDAS").categoriaPadre(cocktails).build();
             categoriaRepository.save(medidas);
             Categoria ginsTonicos = Categoria.builder().denominacion("GINS Y TONICOS").categoriaPadre(cocktails).build();
             categoriaRepository.save(ginsTonicos);
@@ -180,7 +186,7 @@ public class MenudigitalApplication {
             cocktails.getSubCategorias().add(ginsTonicos);
             categoriaRepository.save(cocktails);
 
-            Categoria vinoTirado= Categoria.builder().denominacion("VINO TIRADO").categoriaPadre(vinoPorCopa).build();
+            Categoria vinoTirado = Categoria.builder().denominacion("VINO TIRADO").categoriaPadre(vinoPorCopa).build();
             categoriaRepository.save(vinoTirado);
 
             categoriaRepository.save(vinoPorCopa);
@@ -194,7 +200,6 @@ public class MenudigitalApplication {
             rufianBarraca.getCategorias().add(entrePanes);
             rufianBarraca.getCategorias().add(postres);
             rufianBarraca.getCategorias().add(bebidas);
-            rufianBarraca.getCategorias().add(promociones);
             rufianBarraca.getCategorias().add(cafeteria);
             rufianBarraca.getCategorias().add(promocionesBienRufianas);
             rufianBarraca.getCategorias().add(infusionesBebidas);
@@ -206,7 +211,9 @@ public class MenudigitalApplication {
             rufianBarraca.getCategorias().add(cocteleriaClasica);
             rufianBarraca.getCategorias().add(medidas);
             rufianBarraca.getCategorias().add(ginsTonicos);
+            rufianBarraca.getCategorias().add(vinoTirado);
             rufianBarraca.getCategorias().add(vinoPorCopa);
+            rufianBarraca.getCategorias().add(promociones);
             sucursalRepository.save(rufianBarraca);
 
             logger.info("----------------Generando Articulos---------------------");
@@ -719,6 +726,6 @@ public class MenudigitalApplication {
 
 
         };
-    }
-*/
+    }*/
+
 }

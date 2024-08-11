@@ -7,7 +7,12 @@ import org.springframework.data.repository.query.Param;
 import java.util.List;
 
 public interface CategoriaService extends BaseService<Categoria, Long> {
-    List<Categoria> findAllCategoriasBySucursalId(Long idSucursal);
+    List<Categoria> findAllCategoriasPadreBySucursalId(Long idSucursal);
     void deleteCategoriaInSucursales(Long idCategoria, Long idSucursal);
     List<Categoria> findAllCategoriasByEmpresaId( Long idEmpresa);
+    List<Categoria> findAllSubCategoriasByCategoriaPadreId(Long id);
+
+    List<Categoria> findAllCategoriasBySucursalId(Long idSucursal);
+
+    List<Categoria> findSubcategoriasBySucursalId( Long idSucursal);
 }

@@ -1,16 +1,21 @@
 package com.example.menudigital.bussines.services.Impl;
 
+import com.example.menudigital.bussines.services.ImageService;
 import com.example.menudigital.bussines.services.SucursalService;
 import com.example.menudigital.bussines.services.base.BaseServiceImp;
 import com.example.menudigital.domain.entities.Categoria;
 import com.example.menudigital.domain.entities.Sucursal;
+import com.example.menudigital.repositories.CategoriaRepository;
 import com.example.menudigital.repositories.DomicilioRepository;
 import com.example.menudigital.repositories.EmpresaRepository;
 import com.example.menudigital.repositories.SucursalRepository;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -24,7 +29,13 @@ public class SucursalServiceImpl extends BaseServiceImp<Sucursal, Long> implemen
     private DomicilioRepository domicilioRepository;
     @Autowired
     private EmpresaRepository empresaRepository;
+    @Autowired
+    private ImageService imageService;
+    @Autowired
+    private CategoriaRepository categoriaRepository;
 
+    @Value("${image.folder.path}")
+    private String uploadDir;
 
     @Override
     @Transactional
@@ -34,8 +45,17 @@ public class SucursalServiceImpl extends BaseServiceImp<Sucursal, Long> implemen
         domicilioRepository.save(domicilio);
         sucursal.setDomicilio(domicilio);
 
+        List<Categoria> categorias = categoriaRepository.findAllCategoriasByEmpresaId(sucursal.getEmpresa().getId());
+
         var sucursalPersisted = sucursalRepository.save(sucursal);
+        //Asociamos las categorias de la empresa a la nueva sucursal
+        for(Categoria categoria: categorias) {
+            categoria.getSucursales().add(sucursalPersisted);
+            categoriaRepository.save(categoria);
+            sucursalPersisted.getCategorias().add(categoria);
+        }
         empresa.getSucursales().add(sucursalPersisted);
+        sucursalRepository.save(sucursal);
         empresaRepository.save(empresa);
         return sucursalPersisted;
 
@@ -50,6 +70,10 @@ public class SucursalServiceImpl extends BaseServiceImp<Sucursal, Long> implemen
         var empresa = empresaRepository.getById(sucursal.getEmpresa().getId());
         sucursal.setDomicilio(domicilio);
         sucursal.setEmpresa(empresa);
+        if(!sucursalActualizar.getLogo().equals(null) && !sucursalActualizar.getLogo().equals(sucursal.getLogo())) {
+            Path filePath = Paths.get(uploadDir + sucursalActualizar.getLogo());
+            imageService.deleteImage(filePath);
+        }
         sucursal.setCategorias(sucursalActualizar.getCategorias());
         return sucursalRepository.save(sucursal);
     }
@@ -81,6 +105,8 @@ public class SucursalServiceImpl extends BaseServiceImp<Sucursal, Long> implemen
         if(sucursal.getCategorias().size() > 0) {
             throw new RuntimeException("No se puede eliminar la sucursal porque tiene categorias asociadas");
         }
+        sucursal.setEmpresa(null);
+        sucursalRepository.save(sucursal);
         sucursalRepository.delete(sucursal);
     }
 }

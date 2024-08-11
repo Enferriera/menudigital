@@ -6,7 +6,7 @@ import com.example.menudigital.bussines.facade.ProvinciaFacade;
 import com.example.menudigital.bussines.mapper.BaseMapper;
 import com.example.menudigital.bussines.services.ProvinciaService;
 import com.example.menudigital.bussines.services.base.BaseService;
-import com.example.menudigital.domain.dtos.domicilioDto.ProvinciaDto;
+import com.example.menudigital.domain.dtos.provinciaDto.ProvinciaDto;
 import com.example.menudigital.domain.entities.Provincia;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

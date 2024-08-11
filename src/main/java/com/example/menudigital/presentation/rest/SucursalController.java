@@ -19,7 +19,8 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/sucursales")
-@CrossOrigin(origins="*")
+@CrossOrigin(origins={" https://dashboard-menu-project.vercel.app/",
+        "link: http://localhost:5173"})
 public class SucursalController extends BaseControllerImp<Sucursal, SucursalDto,Long, SucursalFacadeImp> {
     private static final Logger logger = LoggerFactory.getLogger(BaseServiceImp.class);
     public SucursalController(SucursalFacadeImp facade) {
