@@ -3,6 +3,7 @@ package com.example.menudigital.bussines.services.Impl;
 import com.example.menudigital.bussines.services.CategoriaService;
 import com.example.menudigital.bussines.services.SucursalService;
 import com.example.menudigital.bussines.services.base.BaseServiceImp;
+import com.example.menudigital.domain.entities.Articulo;
 import com.example.menudigital.domain.entities.Categoria;
 import com.example.menudigital.domain.entities.Empresa;
 import com.example.menudigital.domain.entities.Sucursal;
@@ -176,6 +177,7 @@ public Categoria create(Categoria categoria) {
     @Override
     public void deleteById(Long id) {
         var categoria = categoriaRepository.getById(id);
+
         if(!categoria.getArticulos().isEmpty() || !categoria.getSubCategorias().isEmpty()) {
             throw new RuntimeException("No se puede eliminar la categoría, porque tiene artículos o subcategorías asociadas");
         }
@@ -193,11 +195,19 @@ public Categoria create(Categoria categoria) {
 
     @Override
     public Categoria getById(Long id) {
-      Categoria categoria = categoriaRepository.getById(id);
-        if (categoria==null) {
-            throw new RuntimeException("No se existe la categoria con el id: " + id );
+      var categoria = categoriaRepository.getById(id);
+        if (categoria == null) {
+            throw new RuntimeException("No  existe la categoria con el id: " + id );
         }
-        return categoriaRepository.getById(id);
+       categoria.setArticulos(getObjetosInternosNoEliminados(categoria.getArticulos()));
+
+        return categoria;
+    }
+
+    private Set<Articulo> getObjetosInternosNoEliminados(Set<Articulo> articulos) {
+        return articulos.stream()
+                .filter(art -> !art.isEliminado())
+                .collect(Collectors.toSet());
     }
 
     @Override

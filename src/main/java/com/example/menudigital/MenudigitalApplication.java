@@ -2,6 +2,7 @@ package com.example.menudigital;
 
 import com.example.menudigital.domain.entities.*;
 import com.example.menudigital.repositories.*;
+import io.github.cdimascio.dotenv.Dotenv;
 import jakarta.transaction.Transactional;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -18,6 +19,8 @@ public class MenudigitalApplication {
     private static final Logger logger = LoggerFactory.getLogger(MenudigitalApplication.class);
 
     public static void main(String[] args) {
+        Dotenv dotenv = Dotenv.load();
+        dotenv.entries().forEach(e -> System.setProperty(e.getKey(), e.getValue()));
         SpringApplication.run(MenudigitalApplication.class, args);
 
         System.out.println(" Funcionando ALberto");
