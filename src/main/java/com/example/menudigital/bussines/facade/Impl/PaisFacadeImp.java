@@ -5,7 +5,7 @@ import com.example.menudigital.bussines.facade.Base.BaseFacadeImp;
 import com.example.menudigital.bussines.facade.PaisFacade;
 import com.example.menudigital.bussines.mapper.BaseMapper;
 import com.example.menudigital.bussines.services.base.BaseService;
-import com.example.menudigital.domain.dtos.domicilioDto.PaisDto;
+import com.example.menudigital.domain.dtos.paisDto.PaisDto;
 import com.example.menudigital.domain.entities.Pais;
 import org.springframework.stereotype.Service;
 

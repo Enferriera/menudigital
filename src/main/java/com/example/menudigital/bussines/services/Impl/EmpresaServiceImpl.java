@@ -1,13 +1,18 @@
 package com.example.menudigital.bussines.services.Impl;
 
 import com.example.menudigital.bussines.services.EmpresaService;
+import com.example.menudigital.bussines.services.ImageService;
 import com.example.menudigital.bussines.services.SucursalService;
 import com.example.menudigital.bussines.services.base.BaseServiceImp;
 import com.example.menudigital.domain.entities.Empresa;
 import com.example.menudigital.repositories.EmpresaRepository;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
+
+import java.nio.file.Path;
+import java.nio.file.Paths;
 
 @Service
 public class EmpresaServiceImpl extends BaseServiceImp<Empresa,Long> implements EmpresaService {
@@ -18,7 +23,11 @@ public class EmpresaServiceImpl extends BaseServiceImp<Empresa,Long> implements 
     @Autowired
     EmpresaRepository empresaRepository;
 
+    @Autowired
+    private ImageService imageService;
 
+    @Value("${image.folder.path}")
+    private String uploadDir;
 
     @Override
     public Empresa addSucursal(Long idEmpresa, Long idSucursal) {
@@ -49,6 +58,7 @@ public class EmpresaServiceImpl extends BaseServiceImp<Empresa,Long> implements 
     @Transactional
     public void deleteById(Long id){
         var empresa = empresaRepository.getById(id);
+        System.out.println(empresa.getSucursales().size());
         if(empresa.getSucursales().size() > 0) {
             throw new RuntimeException("No se puede eliminar la empresa con el id: " + id + " porque tiene sucursales asociadas");
         }
@@ -62,8 +72,19 @@ public class EmpresaServiceImpl extends BaseServiceImp<Empresa,Long> implements 
         if(entityByCuit.isPresent() && !entityByCuit.get().getId().equals(id)) {
             throw new RuntimeException("Ya existe una empresa con el nummero de CUIT: " + request.getCuit());
         }
-
+        if(!optionalEntity.getLogo().equals(null) && !optionalEntity.getLogo().equals(request.getLogo())) {
+            Path filePath = Paths.get(uploadDir + optionalEntity.getLogo());
+            imageService.deleteImage(filePath);
+        }
         return empresaRepository.save(request);
     }
 
+    @Override
+    public Empresa getById(Long id) {
+        Empresa empresa = empresaRepository.getById(id);
+        if (empresa==null) {
+            throw new RuntimeException("No se existe la empresa con el id: " + id );
+        }
+        return empresaRepository.getById(id);
+    }
 }

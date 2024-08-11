@@ -1,4 +1,4 @@
-package com.example.menudigital.domain.dtos.domicilioDto;
+package com.example.menudigital.domain.dtos.paisDto;
 
 import com.example.menudigital.domain.dtos.BaseDto;
 import lombok.AllArgsConstructor;
