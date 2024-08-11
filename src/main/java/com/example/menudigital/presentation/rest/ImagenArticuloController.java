@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping("/imagenArticulos")
 @CrossOrigin(origins={" https://dashboard-menu-project.vercel.app/",
-        "http://localhost:5173"})
+        "link: http://localhost:5173"})
 public class ImagenArticuloController {
     @Autowired
     public ImagenArticuloService imagenArticuloService;

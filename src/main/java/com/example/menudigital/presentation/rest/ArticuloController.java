@@ -15,7 +15,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/articulos")
 @CrossOrigin(origins={" https://dashboard-menu-project.vercel.app/",
-        "http://localhost:5173"})
+        "link: http://localhost:5173"})
 public class ArticuloController extends BaseControllerImp<Articulo, ArticuloDto,Long, ArticuloFacadeImpl> {
     public ArticuloController(ArticuloFacadeImpl facade) {
         super(facade);

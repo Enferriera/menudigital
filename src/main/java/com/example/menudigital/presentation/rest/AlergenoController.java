@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/alergenos")
 @CrossOrigin(origins={" https://dashboard-menu-project.vercel.app/",
-        "http://localhost:5173"})
+        "link: http://localhost:5173"})
 public class AlergenoController extends BaseControllerImp<Alergeno, AlergenoDto, Long, AlergenoFacadeImpl> {
     public AlergenoController(AlergenoFacadeImpl facade) {
         super(facade);

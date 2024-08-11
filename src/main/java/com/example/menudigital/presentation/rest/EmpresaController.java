@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping("/empresas")
 @CrossOrigin(origins={" https://dashboard-menu-project.vercel.app/",
-        "http://localhost:5173"})
+        "link: http://localhost:5173"})
 public class EmpresaController extends BaseControllerImp<Empresa, EmpresaDto, Long, EmpresaFacadeImpl> {
     public EmpresaController(EmpresaFacadeImpl facade) {
         super(facade);
