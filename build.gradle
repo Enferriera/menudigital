@@ -53,6 +53,9 @@ dependencies {
 	// json
 	implementation 'org.json:json:20210307'
 
+	//dotenv
+	implementation 'io.github.cdimascio:java-dotenv:5.2.0'
+
 }
 
 tasks.named('test') {

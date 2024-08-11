@@ -2,7 +2,7 @@ package com.example.menudigital.bussines.facade;
 
 
 import com.example.menudigital.bussines.facade.Base.BaseFacade;
-import com.example.menudigital.domain.dtos.domicilioDto.LocalidadDto;
+import com.example.menudigital.domain.dtos.localidadDto.LocalidadDto;
 
 import java.util.List;
 

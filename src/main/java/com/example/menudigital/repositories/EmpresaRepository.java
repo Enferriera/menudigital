@@ -12,5 +12,12 @@ public interface EmpresaRepository extends BaseRepository<Empresa, Long> {
     @Query("SELECT e FROM Empresa e LEFT JOIN FETCH e.sucursales s WHERE e.id = :id AND e.eliminado=false AND s.eliminado=false")
     Empresa findWithSucursalesById(@Param("id") Long id);
 
+
     Optional<Empresa> findByCuit(Long cuit);
+
+    @Query("SELECT e FROM Empresa e " +
+            "LEFT JOIN FETCH e.sucursales s " +
+            "WHERE e.id = :id AND e.eliminado = false " +
+            "AND (s IS NULL OR s.eliminado = false)")
+    Empresa getById(@Param("id") Long id);
 }

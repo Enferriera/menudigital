@@ -17,6 +17,7 @@ import java.util.List;
 public interface CategoriaMapper extends BaseMapper<Categoria, CategoriaDto>{
 
     CategoriaShortDto toShortDTO(Categoria source);
+    List<CategoriaShortDto> toShortDTOs(List<Categoria> source);
 
     @Mappings({
             @Mapping(source = "idSucursales", target = "sucursales", qualifiedByName = "getById"),

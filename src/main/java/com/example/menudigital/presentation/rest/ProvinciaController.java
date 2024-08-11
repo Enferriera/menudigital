@@ -2,7 +2,7 @@ package com.example.menudigital.presentation.rest;
 
 
 import com.example.menudigital.bussines.facade.Impl.ProvinciaFacadeImp;
-import com.example.menudigital.domain.dtos.domicilioDto.ProvinciaDto;
+import com.example.menudigital.domain.dtos.provinciaDto.ProvinciaDto;
 import com.example.menudigital.domain.entities.Provincia;
 import com.example.menudigital.presentation.rest.Base.BaseControllerImp;
 import org.slf4j.Logger;
@@ -14,7 +14,8 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/provincias")
-@CrossOrigin(origins="*")
+@CrossOrigin(origins={" https://dashboard-menu-project.vercel.app/",
+        "link: http://localhost:5173"})
 public class ProvinciaController extends BaseControllerImp<Provincia, ProvinciaDto,Long, ProvinciaFacadeImp> {
     public ProvinciaController(ProvinciaFacadeImp facade) {
         super(facade);

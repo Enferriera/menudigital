@@ -2,6 +2,7 @@ package com.example.menudigital.bussines.services.Impl;
 
 import com.example.menudigital.bussines.services.ImageService;
 import com.example.menudigital.domain.entities.ImagenBase;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -17,7 +18,8 @@ import java.util.UUID;
 
 @Service
 public class ImageServiceImpl implements ImageService {
-    private static final String UPLOAD_DIR = "src/main/resources/images/";
+    @Value("${image.folder.path}")
+    private String uploadDir;
     @Override
     public ImagenBase save(MultipartFile file) {
         LocalDateTime now = LocalDateTime.now();
@@ -26,7 +28,7 @@ public class ImageServiceImpl implements ImageService {
         String timestamp = now.format(formatter);
         // Agrega la fecha y hora al nombre del archivo
         String fileName =timestamp + "_" + file.getOriginalFilename();
-        Path filePath = Paths.get(UPLOAD_DIR + fileName);
+        Path filePath = Paths.get(uploadDir + fileName);
 
         try {
             Files.createDirectories(filePath.getParent());
@@ -36,8 +38,8 @@ public class ImageServiceImpl implements ImageService {
         }
 
         ImagenBase imagenBase = new ImagenBase();
-        imagenBase.setName(fileName);
-        imagenBase.setUrl(filePath.toString());
+        imagenBase.setName(file.getOriginalFilename());
+        imagenBase.setUrl(fileName);
 
         return imagenBase;
 
@@ -62,4 +64,6 @@ public class ImageServiceImpl implements ImageService {
         return savedImages;
 
     }
+
+
 }

@@ -1,10 +1,7 @@
-package com.example.menudigital.domain.dtos.domicilioDto;
+package com.example.menudigital.domain.dtos.localidadDto;
 
 import com.example.menudigital.domain.dtos.BaseDto;
-import com.example.menudigital.domain.entities.Provincia;
-import jakarta.persistence.CascadeType;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
+import com.example.menudigital.domain.dtos.provinciaDto.ProvinciaDto;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

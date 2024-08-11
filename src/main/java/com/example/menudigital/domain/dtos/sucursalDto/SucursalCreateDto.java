@@ -25,4 +25,7 @@ public class SucursalCreateDto extends BaseDto {
     private boolean esCasaMatriz;
     private DomicilioCreateDto domicilio;
     private Long idEmpresa;
+    private double latitud;
+    private double longitud;
+    private String logo;
 }
