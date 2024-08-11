@@ -1,16 +1,11 @@
 package com.example.menudigital.domain.dtos.domicilioDto;
 
 import com.example.menudigital.domain.dtos.BaseDto;
-import com.example.menudigital.domain.entities.Base;
-import com.example.menudigital.domain.entities.Localidad;
-import jakarta.persistence.CascadeType;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
+import com.example.menudigital.domain.dtos.localidadDto.LocalidadDto;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.hibernate.envers.NotAudited;
 
 @AllArgsConstructor
 @NoArgsConstructor

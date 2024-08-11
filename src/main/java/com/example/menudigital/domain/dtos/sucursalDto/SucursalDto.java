@@ -22,6 +22,9 @@ public class SucursalDto extends BaseDto {
     @Schema(type = "string", format = "time", pattern = "HH:mm:ss")
     private LocalTime horarioCierre;
     private boolean esCasaMatriz;
+    private double latitud;
+    private double longitud;
+    private String logo;
 
     private DomicilioDto domicilio;
 

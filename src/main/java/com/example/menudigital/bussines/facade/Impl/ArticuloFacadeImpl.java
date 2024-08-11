@@ -10,6 +10,8 @@ import com.example.menudigital.domain.dtos.articuloDto.ArticuloCreateDto;
 import com.example.menudigital.domain.dtos.articuloDto.ArticuloDto;
 import com.example.menudigital.domain.entities.Articulo;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -44,5 +46,20 @@ public class ArticuloFacadeImpl extends BaseFacadeImp<Articulo, ArticuloDto,Long
         var entityUpdated = baseService.update(entityToUpdate,id);
         // convierte a Dto para devolver
         return baseMapper.toDTO(entityUpdated);
+    }
+
+    @Override
+    public Page<ArticuloDto> findAllBySucursalIdPaged(Long idSucursal, Pageable pageable){
+        return articuloMapper.toDTOsPage(articuloService.findAllBySucursalIdPaged(idSucursal, pageable));
+    }
+
+    @Override
+    public List<ArticuloDto> findAllByCategoriaId(Long idCategoria) {
+        return articuloMapper.toDTOsList(articuloService.findAllByCategoriaId(idCategoria));
+    }
+
+    @Override
+    public Page<ArticuloDto> findAllByCategoriaIdPaged(Long idCategoria, Pageable pageable) {
+        return articuloMapper.toDTOsPage(articuloService.findAllByCategoriaIdPaged(idCategoria, pageable));
     }
 }

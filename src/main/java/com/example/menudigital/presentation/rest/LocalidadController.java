@@ -2,7 +2,7 @@ package com.example.menudigital.presentation.rest;
 
 
 import com.example.menudigital.bussines.facade.Impl.LocalidadFacadeImp;
-import com.example.menudigital.domain.dtos.domicilioDto.LocalidadDto;
+import com.example.menudigital.domain.dtos.localidadDto.LocalidadDto;
 import com.example.menudigital.domain.entities.Localidad;
 import com.example.menudigital.presentation.rest.Base.BaseControllerImp;
 import org.slf4j.Logger;
@@ -14,7 +14,8 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/localidades")
-@CrossOrigin(origins="*")
+@CrossOrigin(origins={" https://dashboard-menu-project.vercel.app/",
+        "link: http://localhost:5173"})
 public class LocalidadController extends BaseControllerImp<Localidad, LocalidadDto, Long, LocalidadFacadeImp> {
 
     public LocalidadController(LocalidadFacadeImp facade) {
