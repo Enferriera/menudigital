@@ -30,6 +30,7 @@ public class EmpresaServiceImpl extends BaseServiceImp<Empresa,Long> implements 
     private String uploadDir;
 
     @Override
+    @Transactional
     public Empresa addSucursal(Long idEmpresa, Long idSucursal) {
         Empresa empresa = empresaRepository.findWithSucursalesById(idEmpresa);
         empresa.getSucursales().add(sucursalService.getById(idSucursal));
@@ -39,7 +40,6 @@ public class EmpresaServiceImpl extends BaseServiceImp<Empresa,Long> implements 
     }
 
     @Override
-    @Transactional
     public Empresa findWithSucursalesById(Long id) {
         return empresaRepository.findWithSucursalesById(id);
     }
@@ -66,6 +66,7 @@ public class EmpresaServiceImpl extends BaseServiceImp<Empresa,Long> implements 
     }
 
     @Override
+    @Transactional
     public Empresa update(Empresa request, Long id){
         var optionalEntity = empresaRepository.getById(id);
         var entityByCuit= empresaRepository.findByCuit(request.getCuit());

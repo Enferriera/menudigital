@@ -40,4 +40,7 @@ public interface ArticuloRepository extends BaseRepository<Articulo, Long> {
     @Query("SELECT a FROM Articulo a JOIN a.categoria c WHERE c.id = :idCategoria AND a.eliminado = false AND c.eliminado = false")
     Page<Articulo> findAllByCategoriaIdPaged(@Param("idCategoria") Long idCategoria, Pageable pageable);
 
+    @Query("SELECT a FROM Articulo a JOIN a.categoria c JOIN c.sucursales s WHERE s.id=:sucursalId AND a.eliminado=false AND a.habilitado=true")
+    List<Articulo> findAllHabilitadoBySucursalId(@Param("sucursalId") Long sucursalId);
+
     }

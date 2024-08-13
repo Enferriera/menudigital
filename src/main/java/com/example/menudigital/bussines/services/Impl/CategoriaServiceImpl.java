@@ -37,6 +37,7 @@ public class CategoriaServiceImpl extends BaseServiceImp<Categoria,Long> impleme
 @Override
 @Transactional
 public Categoria create(Categoria categoria) {
+    System.out.println("INGRESE AL SERVICIO");
     Set<Sucursal> sucursales = new HashSet<>();
 
     // Verificar y asociar sucursales existentes
@@ -175,6 +176,7 @@ public Categoria create(Categoria categoria) {
     }
 
     @Override
+    @Transactional
     public void deleteById(Long id) {
         var categoria = categoriaRepository.getById(id);
 
