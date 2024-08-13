@@ -7,6 +7,7 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Set;
 
 @Repository
 public interface SucursalRepository extends BaseRepository<Sucursal, Long> {
@@ -20,5 +21,5 @@ public interface SucursalRepository extends BaseRepository<Sucursal, Long> {
 
 
     @Query("SELECT s FROM Sucursal s  WHERE s.empresa.id = :id AND s.eliminado=false")
-    List<Sucursal> findAllByEmpresaId(@Param("id") Long id);
+    Set<Sucursal> findAllByEmpresaId(@Param("id") Long id);
 }

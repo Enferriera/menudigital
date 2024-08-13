@@ -9,6 +9,7 @@ import com.example.menudigital.bussines.services.base.BaseService;
 import com.example.menudigital.domain.dtos.articuloDto.ArticuloCreateDto;
 import com.example.menudigital.domain.dtos.articuloDto.ArticuloDto;
 import com.example.menudigital.domain.entities.Articulo;
+import com.example.menudigital.repositories.ArticuloRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -18,6 +19,9 @@ import java.util.List;
 
 @Service
 public class ArticuloFacadeImpl extends BaseFacadeImp<Articulo, ArticuloDto,Long> implements ArticuloFacade {
+    @Autowired
+    private ArticuloRepository articuloRepository;
+
     public ArticuloFacadeImpl(BaseService<Articulo, Long> baseService, BaseMapper<Articulo, ArticuloDto> baseMapper) {
         super(baseService, baseMapper);
     }
@@ -61,5 +65,15 @@ public class ArticuloFacadeImpl extends BaseFacadeImp<Articulo, ArticuloDto,Long
     @Override
     public Page<ArticuloDto> findAllByCategoriaIdPaged(Long idCategoria, Pageable pageable) {
         return articuloMapper.toDTOsPage(articuloService.findAllByCategoriaIdPaged(idCategoria, pageable));
+    }
+
+    @Override
+    public List<ArticuloDto> findAllHabilitadoBySucursalId(Long sucursalId){
+        return articuloMapper.toDTOsList(articuloService.findAllHabilitadoBySucursalId(sucursalId));
+    }
+
+    @Override
+    public boolean cambiarHabilitado(Long idArticulo){
+        return articuloService.cambiarHabilitado(idArticulo);
     }
 }
