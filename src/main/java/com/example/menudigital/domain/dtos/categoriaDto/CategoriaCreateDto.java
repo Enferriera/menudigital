@@ -19,3 +19,6 @@ public class CategoriaCreateDto extends BaseDto {
     private Long idCategoriaPadre;
 
 }
+
+
+
