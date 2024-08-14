@@ -23,4 +23,6 @@ public interface ArticuloFacade extends BaseFacade<ArticuloDto, Long> {
 
     Page<ArticuloDto> findAllByCategoriaIdPaged(Long idCategoria, Pageable pageable);
 
+    List<ArticuloDto> findAllHabilitadoBySucursalId(Long sucursalId);
+    boolean cambiarHabilitado(Long idArticulo);
 }

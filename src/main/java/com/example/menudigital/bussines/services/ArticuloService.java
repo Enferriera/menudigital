@@ -14,4 +14,6 @@ public interface ArticuloService extends BaseService<Articulo, Long> {
     Page<Articulo> findAllBySucursalIdPaged(Long idSucursal, Pageable pageable);
     List<Articulo> findAllByCategoriaId(Long idCategoria);
     Page<Articulo> findAllByCategoriaIdPaged(Long idCategoria, Pageable pageable);
+    List<Articulo> findAllHabilitadoBySucursalId(Long sucursalId);
+    boolean cambiarHabilitado(Long idArticulo);
 }

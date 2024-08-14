@@ -19,7 +19,6 @@ import java.util.Set;
 @SuperBuilder
 public class Sucursal extends  Base{
 
-
     private String nombre;
     private LocalTime horarioApertura;
     private LocalTime horarioCierre;
