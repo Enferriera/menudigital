@@ -5,6 +5,7 @@ import com.example.menudigital.bussines.services.ImagenArticuloService;
 import com.example.menudigital.bussines.services.base.BaseServiceImp;
 import com.example.menudigital.domain.entities.ImagenArticulo;
 import com.example.menudigital.repositories.ImagenArticuloRepository;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -20,6 +21,7 @@ public class ImagenArticuloServiceImpl extends BaseServiceImp<ImagenArticulo, Lo
     private ImageService imageService;
 
     @Override
+    @Transactional
     public void deleteById(Long id) {
         var imagenArticulo = imagenArticuloRepository.getById(id);
         Path filePath = Paths.get(imagenArticulo.getUrl());

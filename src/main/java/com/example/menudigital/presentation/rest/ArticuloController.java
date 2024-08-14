@@ -50,4 +50,14 @@ public class ArticuloController extends BaseControllerImp<Articulo, ArticuloDto,
     public ResponseEntity<ArticuloDto> update(@PathVariable Long id, @RequestBody ArticuloCreateDto articuloDto) {
         return ResponseEntity.ok().body(facade.updateArticulo(articuloDto, id));
     }
+
+    @GetMapping("/getArticulosHabilitadosBySucursal/{sucursalId}")
+    public ResponseEntity<List<ArticuloDto>> findAllHabilitadoBySucursalId(@PathVariable Long sucursalId){
+        return ResponseEntity.ok().body(facade.findAllHabilitadoBySucursalId(sucursalId));
+    }
+
+    @PutMapping("/changeHabilitado/{articuloId}")
+    public ResponseEntity<Boolean> chageHabilitado(@PathVariable Long articuloId){
+        return ResponseEntity.ok().body(facade.cambiarHabilitado(articuloId));
+    }
 }
