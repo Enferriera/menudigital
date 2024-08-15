@@ -4,8 +4,10 @@ import com.example.menudigital.bussines.services.ArticuloService;
 import com.example.menudigital.bussines.services.base.BaseServiceImp;
 import com.example.menudigital.domain.entities.Articulo;
 import com.example.menudigital.repositories.ArticuloRepository;
+import com.example.menudigital.utils.config.DbCacheConfig;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.repository.query.Param;
@@ -25,6 +27,7 @@ public class ArticuloServiceImpl extends BaseServiceImp<Articulo,Long> implement
     }
 
     @Override
+
    public List<Articulo> findAllBySucursalId(Long idSucusal){
         return articuloRepository.findAllBySucursalId(idSucusal);
     }
