@@ -10,7 +10,9 @@ import com.example.menudigital.domain.dtos.articuloDto.ArticuloCreateDto;
 import com.example.menudigital.domain.dtos.articuloDto.ArticuloDto;
 import com.example.menudigital.domain.entities.Articulo;
 import com.example.menudigital.repositories.ArticuloRepository;
+import com.example.menudigital.utils.config.DbCacheConfig;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -33,6 +35,7 @@ public class ArticuloFacadeImpl extends BaseFacadeImp<Articulo, ArticuloDto,Long
     private ArticuloService articuloService;
 
     @Override
+    @Cacheable(value = DbCacheConfig.CACHE_NAME)
     public List<ArticuloDto> findAllBySucursalId(Long idSucusal){
         return articuloMapper.toDTOsList(articuloService.findAllBySucursalId(idSucusal));
     }
