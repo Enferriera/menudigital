@@ -11,6 +11,8 @@ import com.example.menudigital.domain.dtos.articuloDto.ArticuloDto;
 import com.example.menudigital.domain.entities.Articulo;
 import com.example.menudigital.repositories.ArticuloRepository;
 import com.example.menudigital.utils.config.DbCacheConfig;
+import org.redisson.api.RTopic;
+import org.redisson.api.RedissonClient;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Page;
@@ -29,13 +31,14 @@ public class ArticuloFacadeImpl extends BaseFacadeImp<Articulo, ArticuloDto,Long
     }
 
     @Autowired
+    private RedissonClient redissonClient;
+    @Autowired
     private ArticuloMapper articuloMapper;
 
     @Autowired
     private ArticuloService articuloService;
 
     @Override
-    @Cacheable(value = DbCacheConfig.CACHE_NAME)
     public List<ArticuloDto> findAllBySucursalId(Long idSucusal){
         return articuloMapper.toDTOsList(articuloService.findAllBySucursalId(idSucusal));
     }
@@ -52,6 +55,8 @@ public class ArticuloFacadeImpl extends BaseFacadeImp<Articulo, ArticuloDto,Long
         // Graba una entidad
         var entityUpdated = baseService.update(entityToUpdate,id);
         // convierte a Dto para devolver
+        RTopic topic = redissonClient.getTopic("product-updated");
+        topic.publish(entityUpdated.getId());
         return baseMapper.toDTO(entityUpdated);
     }
 
