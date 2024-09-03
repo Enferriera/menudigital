@@ -13,8 +13,10 @@ import com.example.menudigital.domain.dtos.domicilioDto.DomicilioDto;
 import com.example.menudigital.domain.entities.Articulo;
 import com.example.menudigital.domain.entities.Categoria;
 import com.example.menudigital.domain.entities.Domicilio;
+import com.example.menudigital.utils.config.DbCacheConfig;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.repository.query.Param;
@@ -40,6 +42,7 @@ public class CategoriaFacadeImpl extends BaseFacadeImp<Categoria, CategoriaDto, 
 
     @Override
     @Transactional
+
     public CategoriaDto createCategoria(CategoriaCreateDto dto){
         return baseMapper.toDTO(categoriaService.create(categoriaMapper.toEntityCreate(dto)));
     }
@@ -58,6 +61,7 @@ public class CategoriaFacadeImpl extends BaseFacadeImp<Categoria, CategoriaDto, 
 
     @Override
     @Transactional
+    @CacheEvict(value = {DbCacheConfig.CACHE_NAME_CATEGORIA_HIJA,DbCacheConfig.CACHE_NAME_CATEGORIAS_PADRE})
     public CategoriaDto updateCategoria(Long id, CategoriaCreateDto dto){
         var categoria = categoriaMapper.toEntityCreate(dto);
         return categoriaMapper.toDTO(categoriaService.update(categoria,id));
