@@ -56,6 +56,10 @@ dependencies {
 	//dotenv
 	implementation 'io.github.cdimascio:java-dotenv:5.2.0'
 
+	//redis
+	implementation group: 'org.redisson', name: 'redisson', version: '3.34.0'
+
+
 }
 
 tasks.named('test') {

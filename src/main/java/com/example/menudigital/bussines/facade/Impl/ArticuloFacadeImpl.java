@@ -10,7 +10,12 @@ import com.example.menudigital.domain.dtos.articuloDto.ArticuloCreateDto;
 import com.example.menudigital.domain.dtos.articuloDto.ArticuloDto;
 import com.example.menudigital.domain.entities.Articulo;
 import com.example.menudigital.repositories.ArticuloRepository;
+import com.example.menudigital.utils.config.DbCacheConfig;
+import org.redisson.api.RTopic;
+import org.redisson.api.RedissonClient;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -27,6 +32,8 @@ public class ArticuloFacadeImpl extends BaseFacadeImp<Articulo, ArticuloDto,Long
     }
 
     @Autowired
+    private RedissonClient redissonClient;
+    @Autowired
     private ArticuloMapper articuloMapper;
 
     @Autowired
@@ -38,17 +45,21 @@ public class ArticuloFacadeImpl extends BaseFacadeImp<Articulo, ArticuloDto,Long
     }
 
     @Override
+    @CacheEvict(value = DbCacheConfig.CACHE_NAME_PRODUCTOS)
     public ArticuloDto createArticulo(ArticuloCreateDto dto){
         return articuloMapper.toDTO(articuloService.create(articuloMapper.toEntityCreate(dto)));
     }
 
     @Override
+    @CacheEvict(value = DbCacheConfig.CACHE_NAME_PRODUCTOS)
     public ArticuloDto updateArticulo(ArticuloCreateDto dto,Long id){
         // Convierte a entidad
         var entityToUpdate = articuloMapper.toEntityCreate(dto);
         // Graba una entidad
         var entityUpdated = baseService.update(entityToUpdate,id);
         // convierte a Dto para devolver
+       /* RTopic topic = redissonClient.getTopic("product-updated");
+        topic.publish(entityUpdated.getId());*/
         return baseMapper.toDTO(entityUpdated);
     }
 
