@@ -19,8 +19,8 @@ public class MenudigitalApplication {
     private static final Logger logger = LoggerFactory.getLogger(MenudigitalApplication.class);
 
     public static void main(String[] args) {
-       Dotenv dotenv = Dotenv.load();
-        dotenv.entries().forEach(e -> System.setProperty(e.getKey(), e.getValue()));
+      /* Dotenv dotenv = Dotenv.load();
+        dotenv.entries().forEach(e -> System.setProperty(e.getKey(), e.getValue()));*/
         SpringApplication.run(MenudigitalApplication.class, args);
 
         System.out.println(" Funcionando ALberto");
