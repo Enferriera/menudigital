@@ -22,7 +22,6 @@ public class Categoria extends Base{
 
 
     @OneToMany(mappedBy = "categoria")
-    //@JoinColumn(name = "categoria_id")
     @Builder.Default
     private Set<Articulo> articulos = new HashSet<>();
 

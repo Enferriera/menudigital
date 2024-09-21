@@ -19,8 +19,8 @@ public class MenudigitalApplication {
     private static final Logger logger = LoggerFactory.getLogger(MenudigitalApplication.class);
 
     public static void main(String[] args) {
-      /* Dotenv dotenv = Dotenv.load();
-        dotenv.entries().forEach(e -> System.setProperty(e.getKey(), e.getValue()));*/
+       Dotenv dotenv = Dotenv.load();
+        dotenv.entries().forEach(e -> System.setProperty(e.getKey(), e.getValue()));
         SpringApplication.run(MenudigitalApplication.class, args);
 
         System.out.println(" Funcionando ALberto");
@@ -31,7 +31,7 @@ public class MenudigitalApplication {
     @Autowired
     private ArticuloRepository articuloRepository;
     @Autowired
-    private AlergenosRepository alergenosRepository;
+    private AlergenoRepository alergenosRepository;
     @Autowired
     private DomicilioRepository domicilioRepository;
     @Autowired
@@ -51,7 +51,7 @@ public class MenudigitalApplication {
     @Bean
     @Transactional
     CommandLineRunner init(CategoriaRepository categoriaRepository,
-                           ArticuloRepository articuloRepository, AlergenosRepository alergenosRepository,
+                           ArticuloRepository articuloRepository, AlergenoRepository alergenosRepository,
                            DomicilioRepository domicilioRepository, EmpresaRepository empresaRepository,
                            ImagenArticuloRepository imagenArticuloRepository,
                            SucursalRepository sucursalRepository, LocalidadRepository localidadRepository,

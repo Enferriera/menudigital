@@ -5,5 +5,5 @@ import com.example.menudigital.domain.entities.Alergeno;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface AlergenosRepository extends BaseRepository<Alergeno, Long> {
+public interface AlergenoRepository extends BaseRepository<Alergeno, Long> {
 }

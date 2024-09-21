@@ -18,9 +18,12 @@ import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
+import java.util.Map;
 
 @Service
 public class ArticuloFacadeImpl extends BaseFacadeImp<Articulo, ArticuloDto,Long> implements ArticuloFacade {
@@ -87,4 +90,21 @@ public class ArticuloFacadeImpl extends BaseFacadeImp<Articulo, ArticuloDto,Long
     public boolean cambiarHabilitado(Long idArticulo){
         return articuloService.cambiarHabilitado(idArticulo);
     }
+
+    @Override
+    public ResponseEntity<List<Map<String, Object>>> getAllImagesByArticuloId(Long id) {
+        return articuloService.getAllImagesByArticuloId(id);
+    }
+
+    @Override
+    public ResponseEntity<String> uploadImages(MultipartFile[] files, Long id) {
+        return articuloService.uploadImages(files,id);
+    }
+
+    @Override
+    public ResponseEntity<String> deleteImage(String publicId, Long id) {
+        return articuloService.deleteImage(publicId, id);
+    }
+
+
 }

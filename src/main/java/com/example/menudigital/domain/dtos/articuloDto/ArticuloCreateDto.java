@@ -1,6 +1,7 @@
 package com.example.menudigital.domain.dtos.articuloDto;
 
 import com.example.menudigital.domain.dtos.BaseDto;
+import com.example.menudigital.domain.dtos.ImagenDto;
 import com.example.menudigital.domain.dtos.alergeno.AlergenoDto;
 import com.example.menudigital.domain.dtos.categoriaDto.CategoriaShortDto;
 import com.example.menudigital.domain.entities.ImagenArticulo;
@@ -23,7 +24,7 @@ public class ArticuloCreateDto extends BaseDto {
     protected boolean habilitado = true;
     protected String codigo;
 
-    protected Set<ImagenArticulo> imagenes = new HashSet<>();
+    protected Set<ImagenDto> imagenes = new HashSet<>();
 
     protected Long idCategoria;
 
