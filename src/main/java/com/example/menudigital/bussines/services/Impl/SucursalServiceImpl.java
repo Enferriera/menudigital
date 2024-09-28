@@ -1,5 +1,6 @@
 package com.example.menudigital.bussines.services.Impl;
 
+import com.example.menudigital.bussines.services.CloudinaryService;
 import com.example.menudigital.bussines.services.ImageService;
 import com.example.menudigital.bussines.services.SucursalService;
 import com.example.menudigital.bussines.services.base.BaseServiceImp;
@@ -29,13 +30,11 @@ public class SucursalServiceImpl extends BaseServiceImp<Sucursal, Long> implemen
     private DomicilioRepository domicilioRepository;
     @Autowired
     private EmpresaRepository empresaRepository;
-    @Autowired
-    private ImageService imageService;
+
     @Autowired
     private CategoriaRepository categoriaRepository;
 
-    @Value("${image.folder.path}")
-    private String uploadDir;
+
 
     @Override
     @Transactional
@@ -70,10 +69,6 @@ public class SucursalServiceImpl extends BaseServiceImp<Sucursal, Long> implemen
         var empresa = empresaRepository.getById(sucursal.getEmpresa().getId());
         sucursal.setDomicilio(domicilio);
         sucursal.setEmpresa(empresa);
-        if(sucursalActualizar.getLogo()!=null && !sucursalActualizar.getLogo().equals(sucursal.getLogo())) {
-            Path filePath = Paths.get(uploadDir + sucursalActualizar.getLogo());
-            imageService.deleteImage(filePath);
-        }
         sucursal.setCategorias(sucursalActualizar.getCategorias());
         return sucursalRepository.save(sucursal);
     }
