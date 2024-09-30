@@ -1,0 +1,37 @@
+# Usar una imagen base oficial de OpenJDK
+FROM alpine:latest
+RUN apk update
+RUN apk add openjdk17 bash
+# Crear un directorio para la aplicación dentro del contenedor
+
+COPY . /app
+COPY gradlew .
+COPY gradle/ gradle/
+COPY . .
+# Copiar el archivo de configuración de Gradle/Maven y el archivo de dependencias
+#COPY build.gradle settings.gradle /app/
+
+RUN chmod +x ./gradlew
+
+# Para Gradle
+# COPY pom.xml /app/
+# Para Maven (Si usas Maven, comenta la línea anterior y usa esta)
+
+# Descargar dependencias (esto permite que Docker cachee esta capa y no descargue las dependencias cada vez que cambies el código)
+RUN ./gradlew build -x test --no-daemon
+# RUN mvn dependency:resolve
+# Para Maven
+
+# Copiar el resto del código fuente
+
+
+# Construir la aplicación
+RUN ./gradlew build --no-daemon
+# RUN mvn clean install -DskipTests # Para Maven
+
+# Exponer el puerto en el que corre tu aplicación (por defecto 8080)
+EXPOSE 8090
+
+# Comando para ejecutar la aplicación en modo desarrollo
+CMD ["./gradlew", "bootRun", "--no-daemon"]
+# CMD ["mvn", "spring-boot:run"] # Si usas Maven
