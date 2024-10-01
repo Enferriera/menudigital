@@ -1,37 +1,29 @@
-# Usar una imagen base oficial de OpenJDK
-FROM alpine:latest
-RUN apk update
-RUN apk add openjdk17 bash
-# Crear un directorio para la aplicación dentro del contenedor
+# Usar una imagen base oficial de Alpine con OpenJDK
+FROM openjdk:17-alpine
 
-COPY . /app
-COPY gradlew .
-COPY gradle/ gradle/
-COPY . .
-# Copiar el archivo de configuración de Gradle/Maven y el archivo de dependencias
-#COPY build.gradle settings.gradle /app/
+# Actualizar y agregar bash
+RUN apk update && apk add bash
 
-RUN chmod +x ./gradlew
+# Establecer el directorio de trabajo
+WORKDIR /app
 
-# Para Gradle
-# COPY pom.xml /app/
-# Para Maven (Si usas Maven, comenta la línea anterior y usa esta)
+# Copiar solo los archivos necesarios para descargar dependencias (mejora la caché de Docker)
+COPY gradlew /app/gradlew
+COPY gradle /app/gradle
+COPY build.gradle /app/build.gradle
+COPY settings.gradle /app/settings.gradle
 
-# Descargar dependencias (esto permite que Docker cachee esta capa y no descargue las dependencias cada vez que cambies el código)
+# Dar permisos de ejecución al script gradlew
+RUN chmod +x /app/gradlew
+
+# Descargar dependencias sin ejecutar los tests
 RUN ./gradlew build -x test --no-daemon
-# RUN mvn dependency:resolve
-# Para Maven
 
 # Copiar el resto del código fuente
+COPY . /app
 
-
-# Construir la aplicación
-RUN ./gradlew build --no-daemon
-# RUN mvn clean install -DskipTests # Para Maven
-
-# Exponer el puerto en el que corre tu aplicación (por defecto 8080)
+# Exponer el puerto de la aplicación (puedes cambiarlo si es necesario)
 EXPOSE 8090
 
 # Comando para ejecutar la aplicación en modo desarrollo
-CMD ["./gradlew", "bootRun", "--no-daemon"]
-# CMD ["mvn", "spring-boot:run"] # Si usas Maven
+CMD ["./gradlew", "bootRun", "--no-daemon", "-x", "test"]

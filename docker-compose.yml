@@ -1,10 +1,52 @@
-version: "3.7"
+version: '3.8'
 
 services:
-  redis:
-    image: redis:6.2-alpine
-    container_name: myRedis
-    restart: always
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: spring_app_dev
     ports:
-      - '6379:6379'
-    command: redis-server --loglevel warning
+      - "8090:8090"
+    environment:
+      - SPRING_DATASOURCE_URL=${DB_URL}
+      - SPRING_DATASOURCE_USERNAME=${DB_USERNAME}
+      - SPRING_DATASOURCE_PASSWORD=${DB_PASSWORD}
+      - SPRING_DATA_REDIS_URL=${REDIS_URL}
+
+    depends_on:
+      - db
+      - redis
+    networks:
+      - app_network
+
+
+  db:
+    image: mysql:8.0
+    container_name: db_menudigital
+    environment:
+      - MYSQL_ALLOW_EMPTY_PASSWORD=true
+      - MYSQL_DATABASE=${MYSQL_DATABASE}
+    ports:
+      - "3306:3306"
+    volumes:
+      - db_data:/var/lib/mysql
+    networks:
+      - app_network
+    restart: always  # Lo mismo para la base de datos
+
+  redis:
+    image: redis:latest
+    container_name: redis_dev
+    ports:
+      - "6379:6379"
+    networks:
+      - app_network
+    restart: always  # Redis también debe reiniciarse si falla o el host se reinicia
+
+networks:
+  app_network:
+    driver: bridge
+
+volumes:
+  db_data:

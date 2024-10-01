@@ -2,13 +2,13 @@
 FROM alpine:latest as build
 
 # Actualizar el sistema y agregar OpenJDK 17 y bash
-RUN apk update
-RUN apk add openjdk17 bash
+RUN apk update && apk add openjdk17 bash
 
-# Copiar el código fuente del proyecto al contenedor
-COPY gradlew .
-COPY gradle/ gradle/
-COPY . .
+# Crear el directorio de trabajo en el contenedor
+WORKDIR /app
+
+# Copiar el código fuente y el archivo de Gradle Wrapper al contenedor
+COPY . /app
 
 # Verificar permisos y hacer que gradlew sea ejecutable
 RUN chmod +x ./gradlew
@@ -22,11 +22,11 @@ FROM openjdk:17-alpine
 # Exponer el puerto que la aplicación utiliza
 EXPOSE 8090
 
-# Copiar el archivo .env
-COPY .env ./.env
+# Establecer el directorio de trabajo
+WORKDIR /app
 
 # Copiar el JAR compilado desde la etapa de construcción
-COPY --from=build ./build/libs/menudigital-0.0.1-SNAPSHOT.jar ./app.jar
+COPY --from=build /app/build/libs/menudigital-0.0.1-SNAPSHOT.jar ./app.jar
 
 # Comando de inicio para ejecutar la aplicación
-ENTRYPOINT ["java", "-jar", "app.jar"]
+ENTRYPOINT ["java", "-jar", "./app.jar"]
