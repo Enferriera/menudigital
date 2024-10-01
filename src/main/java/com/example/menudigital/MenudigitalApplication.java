@@ -25,7 +25,7 @@ public class MenudigitalApplication {
 
         System.out.println(" Funcionando ALberto");
     }
-/*
+
     @Autowired
     private CategoriaRepository categoriaRepository;
     @Autowired
@@ -726,6 +726,6 @@ public class MenudigitalApplication {
 
 
         };
-    }*/
+    }
 
 }
