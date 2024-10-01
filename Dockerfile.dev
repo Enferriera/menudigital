@@ -21,6 +21,7 @@ RUN ./gradlew build -x test --no-daemon
 
 # Copiar el resto del código fuente
 COPY . /app
+RUN chmod +x /app/gradlew
 
 # Exponer el puerto de la aplicación (puedes cambiarlo si es necesario)
 EXPOSE 8090
