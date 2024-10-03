@@ -24,6 +24,6 @@ Este proyecto es una aplicación backend de un gestor de menu para restoran
    
 3. Si deseas llenar la base de datos, antes de ejecutar Docker, elimina las siguientes líneas:
 
-En MenudigitalApplication, elimina las líneas 28 y 730.
-En utils->LocalidadesDownloader, elimina las líneas 15 y 74.
+ - En MenudigitalApplication, elimina las líneas 28 y 730.
+ - En utils->LocalidadesDownloader, elimina las líneas 15 y 74.
 Una vez eliminadas estas líneas, ejecuta el paso 2. Al detener el contenedor, debes comentar nuevamente las mismas líneas para volver a ejecutar el contenedor. """
