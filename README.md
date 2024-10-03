@@ -26,4 +26,4 @@ Este proyecto es una aplicación backend de un gestor de menu para restoran
 
  - En MenudigitalApplication, elimina las líneas 28 y 730.
  - En utils->LocalidadesDownloader, elimina las líneas 15 y 74.
-Una vez eliminadas estas líneas, ejecuta el paso 2. Al detener el contenedor, debes comentar nuevamente las mismas líneas para volver a ejecutar el contenedor. """
+ - Una vez eliminadas estas líneas, ejecuta el paso 2. Al detener el contenedor, debes comentar nuevamente las mismas líneas para volver a ejecutar el contenedor.
