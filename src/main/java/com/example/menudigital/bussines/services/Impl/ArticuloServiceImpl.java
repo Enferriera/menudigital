@@ -181,7 +181,7 @@ public class ArticuloServiceImpl extends BaseServiceImp<Articulo,Long> implement
             imagenArticuloRepository.deleteById(id);
 
             // Llamar al servicio de Cloudinary para eliminar la imagen por su publicId
-            return cloudinaryService.deleteImage(publicId, id);
+            return cloudinaryService.deleteImage(publicId);
 
         } catch (Exception e) {
             e.printStackTrace();

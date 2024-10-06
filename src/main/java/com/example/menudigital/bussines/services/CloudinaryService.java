@@ -12,5 +12,5 @@ public interface CloudinaryService {
     }
 
     // Método para eliminar una imagen de Cloudinary
-    public ResponseEntity<String> deleteImage(String publicId, Long id);
+    public ResponseEntity<String> deleteImage(String publicId);
 }

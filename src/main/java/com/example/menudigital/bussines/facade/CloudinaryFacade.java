@@ -9,5 +9,5 @@ public interface CloudinaryFacade {
     public  String uploadFile(MultipartFile file);
 
     // Método para eliminar una imagen de Cloudinary
-    public ResponseEntity<String> deleteImage(String publicId, Long id);
+    public ResponseEntity<String> deleteImage(String publicId);
 }

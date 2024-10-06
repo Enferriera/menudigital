@@ -38,7 +38,7 @@ public class AlergenoServiceImpl extends BaseServiceImp<Alergeno,Long> implement
             imagenAlergenoRepository.deleteById(id);
 
             // Llamar al servicio de Cloudinary para eliminar la imagen por su publicId
-            return cloudinaryService.deleteImage(publicId, id);
+            return cloudinaryService.deleteImage(publicId);
 
         } catch (Exception e) {
             e.printStackTrace();

@@ -20,7 +20,7 @@ public class CloudinaryFacadeImpl implements CloudinaryFacade {
     }
 
     @Override
-    public ResponseEntity<String> deleteImage(String publicId, Long id) {
-        return cloudinaryService.deleteImage(publicId,id);
+    public ResponseEntity<String> deleteImage(String publicId) {
+        return cloudinaryService.deleteImage(publicId);
     }
 }

@@ -23,7 +23,7 @@ public class ImageController {
     }
 
     @PostMapping("/deleteImg")
-    public ResponseEntity<String> deleteById(@RequestParam("publicId") String publicId, @RequestParam("id") Long id) {
-        return cloudinaryFacade.deleteImage(publicId, id);
+    public ResponseEntity<String> deleteById(@RequestParam("publicId") String publicId) {
+        return cloudinaryFacade.deleteImage(publicId);
     }
 }
