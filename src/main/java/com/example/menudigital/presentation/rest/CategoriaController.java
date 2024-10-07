@@ -15,7 +15,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/categorias")
-@CrossOrigin(origins = {"https://dashboard-menu-project.vercel.app", "http://localhost:5173"})
+@CrossOrigin(origins = "*")
 
 public class CategoriaController extends BaseControllerImp<Categoria, CategoriaDto, Long, CategoriaFacadeImpl> {
 

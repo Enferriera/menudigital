@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/alergenos")
-@CrossOrigin(origins = {"https://dashboard-menu-project.vercel.app", "http://localhost:5173"})
+@CrossOrigin(origins = "*")
 
 public class AlergenoController extends BaseControllerImp<Alergeno, AlergenoDto, Long, AlergenoFacadeImpl> {
     public AlergenoController(AlergenoFacadeImpl facade) {
