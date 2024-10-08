@@ -10,10 +10,12 @@ import com.example.menudigital.domain.entities.Sucursal;
 import com.example.menudigital.repositories.CategoriaRepository;
 import com.example.menudigital.repositories.SucursalRepository;
 import jakarta.transaction.Transactional;
+import jdk.swing.interop.SwingInterOpUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Service;
 
+import java.sql.SQLOutput;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
@@ -28,10 +30,14 @@ public class CategoriaServiceImpl extends BaseServiceImp<Categoria,Long> impleme
 
     @Autowired
     private SucursalService sucursalService;
+    @Autowired
+    private SucursalRepository sucursalRepository;
 
     @Override
     public List<Categoria> findAllCategoriasPadreBySucursalId(Long idSucursal){
-        return categoriaRepository.findAllCategoriasPadreBySucursalId(idSucursal);
+        var categorias= categoriaRepository.findAllCategoriasPadreBySucursalId(idSucursal);
+        categorias.forEach(cat->cat.setSubCategorias(getSubcategoriaInternosNoEliminados(cat.getSubCategorias())));
+        return categorias;
     }
 
 @Override
@@ -77,14 +83,17 @@ public Categoria create(Categoria categoria) {
     public void deleteCategoriaInSucursales(Long idCategoria, Long idSucursal) {
         Categoria categoriaExistente = categoriaRepository.getById(idCategoria);
 
-
+        System.out.println(categoriaExistente.getId());
         Sucursal sucursal = sucursalService.getById(idSucursal);
 
         // Eliminar la relación entre la sucursal y la categoría existente
         sucursal.getCategorias().remove(categoriaExistente);
+        sucursalRepository.save(sucursal);
         categoriaExistente.getSucursales().remove(sucursal);
-
         categoriaRepository.save(categoriaExistente);
+        if(categoriaExistente.getSucursales().size()==0){
+            categoriaRepository.delete(categoriaExistente);
+        }
     }
 
     @Override
@@ -191,8 +200,8 @@ public Categoria create(Categoria categoria) {
     }
 
     @Override
-    public List<Categoria> findAllSubCategoriasByCategoriaPadreId(Long id){
-        return categoriaRepository.findAllSubCategoriasByCategoriaPadreId(id);
+    public List<Categoria> findAllSubCategoriasByCategoriaPadreId(Long idCategoria, Long idSucursal){
+        return categoriaRepository.findAllSubCategoriasByCategoriaPadreId(idCategoria,idSucursal);
     }
 
     @Override
@@ -201,14 +210,20 @@ public Categoria create(Categoria categoria) {
         if (categoria == null) {
             throw new RuntimeException("No  existe la categoria con el id: " + id );
         }
-       categoria.setArticulos(getObjetosInternosNoEliminados(categoria.getArticulos()));
-
+       categoria.setArticulos(getArticulosInternosNoEliminados(categoria.getArticulos()));
+        categoria.setSubCategorias(getSubcategoriaInternosNoEliminados(categoria.getSubCategorias()));
         return categoria;
     }
 
-    private Set<Articulo> getObjetosInternosNoEliminados(Set<Articulo> articulos) {
+    private Set<Articulo> getArticulosInternosNoEliminados(Set<Articulo> articulos) {
         return articulos.stream()
                 .filter(art -> !art.isEliminado())
+                .collect(Collectors.toSet());
+    }
+
+    private Set<Categoria> getSubcategoriaInternosNoEliminados(Set<Categoria> subcategorias) {
+        return subcategorias.stream()
+                .filter(cat -> !cat.isEliminado())
                 .collect(Collectors.toSet());
     }
 

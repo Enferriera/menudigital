@@ -10,7 +10,7 @@ public interface CategoriaService extends BaseService<Categoria, Long> {
     List<Categoria> findAllCategoriasPadreBySucursalId(Long idSucursal);
     void deleteCategoriaInSucursales(Long idCategoria, Long idSucursal);
     List<Categoria> findAllCategoriasByEmpresaId( Long idEmpresa);
-    List<Categoria> findAllSubCategoriasByCategoriaPadreId(Long id);
+    List<Categoria> findAllSubCategoriasByCategoriaPadreId(Long idCategoria,Long idSucursal);
 
     List<Categoria> findAllCategoriasBySucursalId(Long idSucursal);
 

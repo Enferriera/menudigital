@@ -26,6 +26,8 @@ public interface BaseRepository<E extends Base, ID extends Serializable> extends
         save(entity);
     }
 
+
+
     @Override
     default E getById(ID id){
         //logger.info("EJECUTANDO GEY BY ID SOBREESCRITO");

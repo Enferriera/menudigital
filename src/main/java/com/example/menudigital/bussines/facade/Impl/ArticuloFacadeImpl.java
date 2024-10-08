@@ -34,7 +34,7 @@ public class ArticuloFacadeImpl extends BaseFacadeImp<Articulo, ArticuloDto,Long
         super(baseService, baseMapper);
     }
 
-    @Autowired
+   @Autowired
     private RedissonClient redissonClient;
     @Autowired
     private ArticuloMapper articuloMapper;
@@ -48,7 +48,7 @@ public class ArticuloFacadeImpl extends BaseFacadeImp<Articulo, ArticuloDto,Long
     }
 
     @Override
-    @CacheEvict(value = DbCacheConfig.CACHE_NAME_PRODUCTOS)
+    //@CacheEvict(value = DbCacheConfig.CACHE_NAME_PRODUCTOS)
     public ArticuloDto createArticulo(ArticuloCreateDto dto){
         return articuloMapper.toDTO(articuloService.create(articuloMapper.toEntityCreate(dto)));
     }

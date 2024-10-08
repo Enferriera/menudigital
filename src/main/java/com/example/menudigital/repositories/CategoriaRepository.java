@@ -16,10 +16,10 @@ public interface CategoriaRepository extends BaseRepository<Categoria,Long> {
 
     @Query("SELECT DISTINCT c FROM Categoria c " +
             "JOIN c.sucursales s " +
-            "LEFT JOIN FETCH c.subCategorias sc " +
+            "LEFT JOIN c.subCategorias sc " +
             "LEFT JOIN sc.sucursales s2 " +
             "WHERE s.id = :idSucursal AND c.eliminado = false " +
-            "AND (sc IS NULL OR (sc.eliminado = false AND s2.id = :idSucursal)) " +
+
             "AND c.categoriaPadre IS NULL")
     List<Categoria> findAllCategoriasPadreBySucursalId(@Param("idSucursal") Long idSucursal);
     @Query("SELECT DISTINCT  c FROM Categoria c JOIN c.sucursales s WHERE s.empresa.id = :idEmpresa AND c.eliminado=false")
@@ -40,14 +40,14 @@ public interface CategoriaRepository extends BaseRepository<Categoria,Long> {
             "LEFT JOIN FETCH c.subCategorias sc " +
             "LEFT JOIN FETCH c.articulos a " +
             "WHERE c.id = :id " +
-            "AND c.eliminado = false " +
-            "AND (sc.eliminado = false OR sc IS NULL) "
-            )
+            "AND c.eliminado = false "
+
+    )
     Categoria getById(@Param("id") Long id);
 
 
-    @Query("SELECT c FROM Categoria c  WHERE  c.eliminado=false  AND c.categoriaPadre.id=:id")
-    List<Categoria> findAllSubCategoriasByCategoriaPadreId(@Param("id") Long id);
+    @Query("SELECT c FROM Categoria c JOIN c.sucursales s WHERE  c.eliminado=false  AND c.categoriaPadre.id=:idCategoria AND s.id=:idSucursal")
+    List<Categoria> findAllSubCategoriasByCategoriaPadreId(@Param("idCategoria") Long idCategoria,@Param("idSucursal") Long idSucursal);
 
     @Query("SELECT c FROM Categoria c JOIN c.sucursales s WHERE s.id = :idSucursal AND c.eliminado=false")
     List<Categoria> findAllCategoriasBySucursalId(@Param("idSucursal") Long idSucursal);

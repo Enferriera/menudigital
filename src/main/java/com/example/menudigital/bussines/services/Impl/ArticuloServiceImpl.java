@@ -7,7 +7,6 @@ import com.example.menudigital.domain.entities.Articulo;
 import com.example.menudigital.domain.entities.ImagenArticulo;
 import com.example.menudigital.repositories.ArticuloRepository;
 import com.example.menudigital.repositories.ImagenArticuloRepository;
-import com.example.menudigital.utils.config.DbCacheConfig;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.Cacheable;

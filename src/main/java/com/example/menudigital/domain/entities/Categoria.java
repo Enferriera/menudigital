@@ -29,7 +29,7 @@ public class Categoria extends Base{
     @Builder.Default
     private Set<Categoria> subCategorias = new HashSet<>();
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.MERGE)
     @JoinColumn(name = "categoria_padre_id")
     private Categoria categoriaPadre;
 

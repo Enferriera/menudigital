@@ -68,8 +68,8 @@ public class CategoriaFacadeImpl extends BaseFacadeImp<Categoria, CategoriaDto, 
     }
 
     @Override
-    public List<CategoriaDto> findAllSubCategoriasByCategoriaPadreId(Long id) {
-        return baseMapper.toDTOsList(categoriaService.findAllSubCategoriasByCategoriaPadreId(id));
+    public List<CategoriaDto> findAllSubCategoriasByCategoriaPadreId(Long idCategoria, Long idSucursal) {
+        return baseMapper.toDTOsList(categoriaService.findAllSubCategoriasByCategoriaPadreId(idCategoria,idSucursal));
     }
 
     @Override
