@@ -4,6 +4,7 @@ import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import lombok.*;
 import lombok.experimental.SuperBuilder;
+import org.hibernate.envers.NotAudited;
 
 @Entity
 @AllArgsConstructor
@@ -12,6 +13,7 @@ import lombok.experimental.SuperBuilder;
 @Getter
 @ToString
 @SuperBuilder
+
 public class ImagenAlergeno  extends Base {
     private String name;
     @Column(length = 2000)
