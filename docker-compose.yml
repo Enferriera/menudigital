@@ -19,6 +19,8 @@ services:
       - redis
     networks:
       - app_network
+    env_file: # Aquí se especifica el archivo .env
+      - .env
 
 
   db:

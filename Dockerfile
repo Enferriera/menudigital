@@ -9,6 +9,7 @@ WORKDIR /app
 
 # Copiar el código fuente y el archivo de Gradle Wrapper al contenedor
 COPY . /app
+COPY . .
 
 # Verificar permisos y hacer que gradlew sea ejecutable
 RUN chmod +x ./gradlew

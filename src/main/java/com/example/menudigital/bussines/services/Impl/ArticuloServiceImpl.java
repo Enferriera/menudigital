@@ -57,6 +57,7 @@ public class ArticuloServiceImpl extends BaseServiceImp<Articulo,Long> implement
     @Override
     @Transactional
     public Articulo update(Articulo articulo, Long id) {
+        System.out.println("Entre aca");
         var optionalEntity = baseRepository.getById(id);
         var articuloPorCodigo = articuloRepository.findByCodigoAndEliminadoFalse(articulo.getCodigo());
 

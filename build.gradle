@@ -56,7 +56,7 @@ dependencies {
 	implementation 'org.json:json:20210307'
 
 	//dotenv
-	implementation 'io.github.cdimascio:java-dotenv:5.2.0'
+	//implementation 'io.github.cdimascio:java-dotenv:5.2.0'
 
 	//redis
 	implementation group: 'org.redisson', name: 'redisson', version: '3.34.0'
